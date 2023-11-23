@@ -403,4 +403,73 @@ class Bloco5Ex1Test {
         assertEquals(expected, bloco5Ex1.getAverageOfMultiples(number));
     }
 
+    @Test
+    public void shouldReturnASCSortedArray() {
+        int[] array = {3, 2, 1};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {1, 2, 3};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+    }
+
+    @Test
+    public void shouldReturnASCSortedArrayWithZero() {
+        int[] array = {3, 2, 0, 1};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {0, 1, 2, 3};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+    }
+
+    @Test
+    public void shouldReturnASCSortedArrayWithAllZeros() {
+        int[] array = {0, 0, 0};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {0, 0, 0};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+    }
+
+    @Test
+    public void shouldReturnASCSortedArrayWithOneElement() {
+        int[] array = {0};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {0};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+    }
+
+    @Test
+    public void shouldReturnDESCSortedArray() {
+        int[] array = {1, 2, 3};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {3, 2, 1};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+    }
+
+    @Test
+    public void shouldReturnDESCSortedArrayWithZero() {
+        int[] array = {3, 2, 0, 1};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {3, 2, 1, 0};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+    }
+
+    @Test
+    public void shouldReturnDESCSortedArrayWithAllZeros() {
+        int[] array = {0, 0, 0};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {0, 0, 0};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+    }
+
+    @Test
+    public void shouldReturnDESCSortedArrayWithOneElement() {
+        int[] array = {0};
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        int[] expected = {0};
+        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+    }
+
+    @Test
+    public void shouldReturnExceptionForEmptyArray() {
+        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
+        assertThrows(MalformedParametersException.class, () -> bloco5Ex1.sorted(SortingType.ASC));
+    }
 }

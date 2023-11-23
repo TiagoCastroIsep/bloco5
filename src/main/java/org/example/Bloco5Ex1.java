@@ -27,7 +27,7 @@ public class Bloco5Ex1 {
 
     public int[] add(int number) {
         int[] extendedVector = new int[vector.length + 1];
-        for (int i = 0; i < vector.length; i++) { extendedVector[i] = vector[i]; }
+        for (int i = 0; i < vector.length; i++) extendedVector[i] = vector[i];
         extendedVector[extendedVector.length - 1] = number;
         return extendedVector;
     }
@@ -136,16 +136,15 @@ public class Bloco5Ex1 {
 
         int[] multiples = new int[getMultiplesLength(number)];
         int currIndex = 0;
-        for (int n : vector) if (n % number == 0) {
-            multiples[currIndex] = n;
-            currIndex++;
-        }
-
+        for (int n : vector)
+            if (n % number == 0) {
+                multiples[currIndex] = n;
+                currIndex++;
+            }
         return multiples;
     }
 
     private int getMultiplesLength(int number) {
-        if (number == 0) return vector.length;
         int count = 0;
         for (int n : vector) if (n % number == 0) count++;
         return count;
@@ -153,6 +152,37 @@ public class Bloco5Ex1 {
 
     public double getAverageOfMultiples(int number) {
         return getAverage(getMultiplesOfNumber(number));
+    }
+
+    //TODO: alinea m)
+    public int[] sorted(SortingType sortingType) {
+        if (vector.length == 0) throw new MalformedParametersException("Array can't be empty");
+        int temp;
+        int[] sortedArray = new int[vector.length];
+        if (sortingType == SortingType.ASC) {
+            for (int i = vector.length - 1; i >= 1; i--) {
+                for (int j = 0; j < i; j++) {
+                    if (vector[j] > vector[j + 1]) { //TODO: mutation to kill
+                        temp = vector[j];
+                        vector[j] = vector[j + 1];
+                        vector[j + 1] = temp;
+                    }
+                }
+            }
+            return vector;
+        }
+        else {
+            for (int i = vector.length - 1; i >= 1; i--) {
+                for (int j = 0; j < i; j++) {
+                    if (vector[j] < vector[j + 1]) { //TODO: mutation to kill
+                        temp = vector[j + 1];
+                        vector[j + 1] = vector[j];
+                        vector[j] = temp;
+                    }
+                }
+            }
+            return vector;
+        }
     }
 
     //TODO: alinea m)
