@@ -6,470 +6,538 @@ import java.lang.reflect.MalformedParametersException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Bloco5Ex1Test {
+class VectorTest {
     @Test
     public void shouldCreateObjectWithNoParameters() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
+        Vector vector = new Vector();
         int[] expected = new int[0];
-        assertArrayEquals(expected, bloco5Ex1.getVector());
+        assertArrayEquals(expected, vector.getVector());
     }
 
     @Test
     public void shouldCreateObjectWithParameters() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
-        assertArrayEquals(array, bloco5Ex1.getVector());
+        Vector vector = new Vector(array);
+        assertArrayEquals(array, vector.getVector());
     }
 
     @Test
     public void shouldReturnEmptyArray() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
-        assertArrayEquals(new int[0], bloco5Ex1.getVectorFromEmptyConstructor());
+        Vector vector = new Vector();
+        assertArrayEquals(new int[0], vector.getVectorFromEmptyConstructor());
     }
 
     @Test
     public void shouldReturnProvidedArray() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
-        assertArrayEquals(array, bloco5Ex1.getVectorFromEmptyConstructor());
+        Vector vector = new Vector(array);
+        assertArrayEquals(array, vector.getVectorFromEmptyConstructor());
     }
 
     @Test
     public void shouldReturnValueFromArrayAtIndexOf() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = 0;
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getValueAt(index));
+        assertEquals(expected, vector.getValueAt(index));
     }
 
     @Test
     public void shouldReturnExceptionForInvalidIndex() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = -1;
-        assertThrows(IndexOutOfBoundsException.class, () -> bloco5Ex1.getValueAt(index));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.getValueAt(index));
     }
 
     @Test
     public void shouldReturnExceptionForValidIndexOnEmptyArray() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(); // empty constructor sets array as empty
+        Vector vector = new Vector(); // empty constructor sets array as empty
         int index = 0;
-        assertThrows(IndexOutOfBoundsException.class, () -> bloco5Ex1.getValueAt(index));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.getValueAt(index));
     }
 
     @Test
     public void shouldAddNumberOneToVectorAtLastPosition() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 1;
         int[] expected = {1, 2, 3, 1};
-        assertArrayEquals(expected, bloco5Ex1.add(number));
+        assertArrayEquals(expected, vector.add(number));
     }
 
     @Test
     public void shouldAddNumberZeroToVectorAtLastPosition() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 0;
         int[] expected = {1, 2, 3, 0};
-        assertArrayEquals(expected, bloco5Ex1.add(number));
+        assertArrayEquals(expected, vector.add(number));
     }
 
     @Test
     public void shouldRemoveNumberAtFirstPosition() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = 0;
         int[] expected = {2, 3};
-        assertArrayEquals(expected, bloco5Ex1.removeAt(index));
+        assertArrayEquals(expected, vector.removeAt(index));
     }
 
     @Test
     public void shouldRemoveNumberAtLastPosition() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = 2;
         int[] expected = {1, 2};
-        assertArrayEquals(expected, bloco5Ex1.removeAt(index));
+        assertArrayEquals(expected, vector.removeAt(index));
     }
 
     @Test
     public void shouldThrowExceptionForIndexLessThanZero_removeAt() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = -1;
-        assertThrows(IndexOutOfBoundsException.class, () -> bloco5Ex1.removeAt(index));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.removeAt(index));
     }
 
     @Test
     public void shouldThrowExceptionForIndexGreaterThanArrayLength_removeAt() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int index = 3;
-        assertThrows(IndexOutOfBoundsException.class, () -> bloco5Ex1.removeAt(index));
+        assertThrows(IndexOutOfBoundsException.class, () -> vector.removeAt(index));
     }
 
     @Test
     public void shouldReturnLengthFromEmptyVector() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
+        Vector vector = new Vector();
         int expected = 0;
-        assertEquals(expected, bloco5Ex1.getLength());
+        assertEquals(expected, vector.getLength());
     }
 
     @Test
     public void shouldReturnLengthFromVector() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 3;
-        assertEquals(expected, bloco5Ex1.getLength());
+        assertEquals(expected, vector.getLength());
     }
 
     @Test
     public void shouldReturnMaxValueFromVectorWithAllOnes() {
         int[] array = {1, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMaxValueFromVectorWithAllZeros() {
         int[] array = {0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 0;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMaxValueFromVectorWithOneRepeatedValue() {
         int[] array = {1, 2, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 2;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMaxValueFromVectorWithUniqueValues() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 3;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMaxValueFromVectorWithUniqueValuesJustOneElement() {
         int[] array = {1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMinValueFromVectorWithAllZeros() {
         int[] array = {0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 0;
-        assertEquals(expected, bloco5Ex1.getMax());
+        assertEquals(expected, vector.getMax());
     }
 
     @Test
     public void shouldReturnMinValueFromVectorWithOneRepeatedValue() {
         int[] array = {1, 2, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getMin());
+        assertEquals(expected, vector.getMin());
     }
 
     @Test
     public void shouldReturnMinValueFromVectorWithUniqueValues() {
         int[] array = {2, 1, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getMin());
+        assertEquals(expected, vector.getMin());
     }
 
     @Test
     public void shouldReturnMinValueFromVectorWithUniqueValuesFirstValIsMin() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int expected = 1;
-        assertEquals(expected, bloco5Ex1.getMin());
+        assertEquals(expected, vector.getMin());
     }
 
     @Test
     public void shouldReturnAverageFromVectorPositiveValues() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 2.0;
-        assertEquals(expected, bloco5Ex1.getAverage(array));
+        assertEquals(expected, vector.getAverage(array));
     }
 
     @Test
     public void shouldReturnAverageFromVectorNegativeValues() {
         int[] array = {-1, -2, -3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = -2.0;
-        assertEquals(expected, bloco5Ex1.getAverage(array));
+        assertEquals(expected, vector.getAverage(array));
     }
 
     @Test
     public void shouldReturnAverageFromVectorWithAllZeroValues() {
         int[] array = {0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 0;
-        assertEquals(expected, bloco5Ex1.getAverage(array));
+        assertEquals(expected, vector.getAverage(array));
     }
 
     @Test
     public void shouldReturnExceptionFromEmptyVector_getAverageMethod() {
         int[] array = {};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
-        assertThrows(ArithmeticException.class, () -> bloco5Ex1.getAverage(array));
+        Vector vector = new Vector(array);
+        assertThrows(ArithmeticException.class, () -> vector.getAverage(array));
     }
 
     @Test
     public void shouldReturnEvensArrayForAllPositiveNumbers() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {2, 4};
-        assertArrayEquals(expected, bloco5Ex1.getEvenNumbers());
+        assertArrayEquals(expected, vector.getEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvensArrayForAllPositiveNumbersAndOneZero() {
         int[] array = {1, 2, 0, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {2, 0, 4};
-        assertArrayEquals(expected, bloco5Ex1.getEvenNumbers());
+        assertArrayEquals(expected, vector.getEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvensArrayForAllNegativeNumbers() {
         int[] array = {-1, -2, -3, -4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {-2, -4};
-        assertArrayEquals(expected, bloco5Ex1.getEvenNumbers());
+        assertArrayEquals(expected, vector.getEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvensArrayForAllZeros() {
         int[] array = {0, 0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0, 0, 0, 0};
-        assertArrayEquals(expected, bloco5Ex1.getEvenNumbers());
+        assertArrayEquals(expected, vector.getEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvenNumbersAverageFromVectorPositiveValues() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 3;
-        assertEquals(expected, bloco5Ex1.getAverageEvenNumbers());
+        assertEquals(expected, vector.getAverageEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvenNumbersAverageFromVectorNegativeValues() {
         int[] array = {-1, -2, -3, -4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = -3.0;
-        assertEquals(expected, bloco5Ex1.getAverageEvenNumbers());
+        assertEquals(expected, vector.getAverageEvenNumbers());
     }
 
     @Test
     public void shouldReturnEvenNumbersAverageFromVectorWithAllZeroValues() {
         int[] array = {0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 0;
-        assertEquals(expected, bloco5Ex1.getAverageEvenNumbers());
+        assertEquals(expected, vector.getAverageEvenNumbers());
     }
 
     @Test
     public void shouldReturnExceptionFromEmptyVector_getAverageEvenNumbers() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
-        assertThrows(MalformedParametersException.class, bloco5Ex1::getAverageEvenNumbers);
+        Vector vector = new Vector();
+        assertThrows(MalformedParametersException.class, vector::getAverageEvenNumbers);
     }
     /** START: odds **/
     @Test
     public void shouldReturnOddsArrayForAllPositiveNumbers() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {1, 3};
-        assertArrayEquals(expected, bloco5Ex1.getOddNumbers());
+        assertArrayEquals(expected, vector.getOddNumbers());
     }
 
     @Test
     public void shouldReturnOddsArrayForAllPositiveNumbersAndOneZero() {
         int[] array = {1, 2, 0, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {1};
-        assertArrayEquals(expected, bloco5Ex1.getOddNumbers());
+        assertArrayEquals(expected, vector.getOddNumbers());
     }
 
     @Test
     public void shouldReturnOddsArrayForAllNegativeNumbers() {
         int[] array = {-1, -2, -3, -4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {-1, -3};
-        assertArrayEquals(expected, bloco5Ex1.getOddNumbers());
+        assertArrayEquals(expected, vector.getOddNumbers());
     }
 
     @Test
     public void shouldReturnOddsArrayForAllZeros() {
         int[] array = {0, 0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {};
-        assertArrayEquals(expected, bloco5Ex1.getOddNumbers());
+        assertArrayEquals(expected, vector.getOddNumbers());
     }
 
     @Test
     public void shouldReturnOddNumbersAverageFromVectorPositiveValues() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 2.0;
-        assertEquals(expected, bloco5Ex1.getAverageOddNumbers());
+        assertEquals(expected, vector.getAverageOddNumbers());
     }
 
     @Test
     public void shouldReturnOddNumbersAverageFromVectorNegativeValues() {
         int[] array = {-1, -2, -3, -4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = -2.0;
-        assertEquals(expected, bloco5Ex1.getAverageOddNumbers());
+        assertEquals(expected, vector.getAverageOddNumbers());
     }
 
     @Test
     public void shouldReturnOddNumbersAverageFromVectorWithAllZeroValues() {
         int[] array = {0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         double expected = 0.0;
-        assertEquals(expected, bloco5Ex1.getAverageOddNumbers());
+        assertEquals(expected, vector.getAverageOddNumbers());
     }
 
     @Test
     public void shouldReturnExceptionFromEmptyVector_getAverageOddNumbers() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
-        assertThrows(MalformedParametersException.class, bloco5Ex1::getAverageOddNumbers);
+        Vector vector = new Vector();
+        assertThrows(MalformedParametersException.class, vector::getAverageOddNumbers);
     }
 
     @Test
     public void shouldReturnMultiplesOfNumberZero() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 0;
         int[] expected = {1, 2, 3, 4};
-        assertArrayEquals(expected, bloco5Ex1.getMultiplesOfNumber(number));
+        assertArrayEquals(expected, vector.getMultiplesOfNumber(number));
     }
 
     @Test
     public void shouldReturnMultiplesOfNumberTwo() {
         int[] array = {1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 2;
         int[] expected = {2, 4};
-        assertArrayEquals(expected, bloco5Ex1.getMultiplesOfNumber(number));
+        assertArrayEquals(expected, vector.getMultiplesOfNumber(number));
     }
 
     @Test
     public void shouldThrowExceptionForEmptyVector_getMultiplesOfNumber() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
+        Vector vector = new Vector();
         int number = 2;
-        assertThrows(ArithmeticException.class, () -> bloco5Ex1.getMultiplesOfNumber(number));
+        assertThrows(ArithmeticException.class, () -> vector.getMultiplesOfNumber(number));
     }
 
     @Test
     public void shouldReturnAverageOfMultiplesOfNumberTwo() {
         int[] array = {0, 1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 2;
         double expected = 2.0;
-        assertEquals(expected, bloco5Ex1.getAverageOfMultiples(number));
+        assertEquals(expected, vector.getAverageOfMultiples(number));
     }
 
     @Test
     public void shouldReturnAverageOfMultiplesOfNumberZero() {
         int[] array = {0, 1, 2, 3, 4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 0;
         double expected = 2.0;
-        assertEquals(expected, bloco5Ex1.getAverageOfMultiples(number));
+        assertEquals(expected, vector.getAverageOfMultiples(number));
     }
     @Test
     public void shouldReturnAverageOfMultiplesOfNumberTwoOnNegativesArray() {
         int[] array = {0, -1, -2, -3, -4};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int number = 0;
         double expected = -2.0;
-        assertEquals(expected, bloco5Ex1.getAverageOfMultiples(number));
+        assertEquals(expected, vector.getAverageOfMultiples(number));
     }
 
     @Test
     public void shouldReturnASCSortedArray() {
         int[] array = {3, 2, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {1, 2, 3};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+        assertArrayEquals(expected, vector.sorted(SortingType.ASC));
     }
 
     @Test
     public void shouldReturnASCSortedArrayWithZero() {
         int[] array = {3, 2, 0, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0, 1, 2, 3};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+        assertArrayEquals(expected, vector.sorted(SortingType.ASC));
     }
 
     @Test
     public void shouldReturnASCSortedArrayWithAllZeros() {
         int[] array = {0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0, 0, 0};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+        assertArrayEquals(expected, vector.sorted(SortingType.ASC));
     }
 
     @Test
     public void shouldReturnASCSortedArrayWithOneElement() {
         int[] array = {0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.ASC));
+        assertArrayEquals(expected, vector.sorted(SortingType.ASC));
     }
 
     @Test
     public void shouldReturnDESCSortedArray() {
         int[] array = {1, 2, 3};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {3, 2, 1};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+        assertArrayEquals(expected, vector.sorted(SortingType.DESC));
     }
 
     @Test
     public void shouldReturnDESCSortedArrayWithZero() {
         int[] array = {3, 2, 0, 1};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {3, 2, 1, 0};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+        assertArrayEquals(expected, vector.sorted(SortingType.DESC));
     }
 
     @Test
     public void shouldReturnDESCSortedArrayWithAllZeros() {
         int[] array = {0, 0, 0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0, 0, 0};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+        assertArrayEquals(expected, vector.sorted(SortingType.DESC));
     }
 
     @Test
     public void shouldReturnDESCSortedArrayWithOneElement() {
         int[] array = {0};
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1(array);
+        Vector vector = new Vector(array);
         int[] expected = {0};
-        assertArrayEquals(expected, bloco5Ex1.sorted(SortingType.DESC));
+        assertArrayEquals(expected, vector.sorted(SortingType.DESC));
     }
 
     @Test
     public void shouldReturnExceptionForEmptyArray() {
-        Bloco5Ex1 bloco5Ex1 = new Bloco5Ex1();
-        assertThrows(MalformedParametersException.class, () -> bloco5Ex1.sorted(SortingType.ASC));
+        Vector vector = new Vector();
+        assertThrows(MalformedParametersException.class, () -> vector.sorted(SortingType.ASC));
+    }
+
+    @Test
+    public void shouldReturnTrueForEmptyArray() {
+        Vector vector = new Vector();
+        assertTrue(vector.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnFalseForArrayNotEmpty() {
+        int[] array = {0};
+        Vector vector = new Vector(array);
+        assertFalse(vector.isEmpty());
+    }
+
+    @Test
+    public void shouldReturnTrueForOneElementArray() {
+        int[] array = {0};
+        Vector vector = new Vector(array);
+        assertTrue(vector.hasOneElement());
+    }
+
+    @Test
+    public void shouldReturnFalseForArrayWithZeroOrMoreThanOneElements() {
+        Vector vector = new Vector();
+        assertFalse(vector.hasOneElement());
+    }
+
+    @Test
+    public void shouldReturnTrueForOneEvenElement() {
+        int[] array = {0};
+        Vector vector = new Vector(array);
+        assertTrue(vector.hasEvenElements());
+    }
+
+    @Test
+    public void shouldReturnFalseNoneEvenElements() {
+        int[] array = {1, 3};
+        Vector vector = new Vector(array);
+        assertFalse(vector.hasEvenElements());
+    }
+
+    @Test
+    public void shouldReturnTrueForOneOddElement() {
+        int[] array = {1};
+        Vector vector = new Vector(array);
+        assertTrue(vector.hasOddElements());
+    }
+
+    @Test
+    public void shouldReturnFalseNoneOddElements() {
+        int[] array = {0, 2};
+        Vector vector = new Vector(array);
+        assertFalse(vector.hasOddElements());
+    }
+
+    @Test
+    public void shouldReturnTrueForOneDuplicatedElement() {
+        int[] array = {1, 1, 2};
+        Vector vector = new Vector(array);
+        assertTrue(vector.hasDuplicates());
+    }
+
+    @Test
+    public void shouldReturnFalseForNoneDuplicateElements() {
+        int[] array = {0, 2, 3, 4};
+        Vector vector = new Vector(array);
+        assertFalse(vector.hasDuplicates());
     }
 }

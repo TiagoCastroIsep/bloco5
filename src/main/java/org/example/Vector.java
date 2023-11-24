@@ -1,15 +1,21 @@
 package org.example;
 
 import java.lang.reflect.MalformedParametersException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class Bloco5Ex1 {
+public class Vector {
     private final int[] vector;
 
-    public Bloco5Ex1() {
-        this.vector = new int[0]; // a) vetor vazio
+    public Vector() {
+        this(new int[0]);
     }
 
-    public Bloco5Ex1(int[] vector) {
+    public Vector(int[] vector) {
         this.vector = vector;
     }
 
@@ -49,13 +55,13 @@ public class Bloco5Ex1 {
 
     public int getMax() {
         int maxVal = vector[0];
-        for (int value : vector) if (maxVal < value) maxVal = value;
+        for (int currNumber : vector) maxVal = Math.max(currNumber, maxVal);
         return maxVal;
     }
 
     public int getMin() {
         int minVal = vector[0];
-        for (int value : vector) if (minVal > value) minVal = value;
+        for (int currNumber : vector) minVal = Math.min(currNumber, minVal);
         return minVal;
     }
 
@@ -154,36 +160,61 @@ public class Bloco5Ex1 {
         return getAverage(getMultiplesOfNumber(number));
     }
 
-    //TODO: alinea m)
     public int[] sorted(SortingType sortingType) {
         if (vector.length == 0) throw new MalformedParametersException("Array can't be empty");
-        int temp;
-        int[] sortedArray = new int[vector.length];
+
+        int[] sortedArray = Arrays.copyOf(vector, vector.length);
+
         if (sortingType == SortingType.ASC) {
-            for (int i = vector.length - 1; i >= 1; i--) {
-                for (int j = 0; j < i; j++) {
-                    if (vector[j] > vector[j + 1]) { //TODO: mutation to kill
-                        temp = vector[j];
-                        vector[j] = vector[j + 1];
-                        vector[j + 1] = temp;
-                    }
-                }
-            }
-            return vector;
+            Arrays.sort(sortedArray);
+            return sortedArray;
         }
-        else {
-            for (int i = vector.length - 1; i >= 1; i--) {
-                for (int j = 0; j < i; j++) {
-                    if (vector[j] < vector[j + 1]) { //TODO: mutation to kill
-                        temp = vector[j + 1];
-                        vector[j + 1] = vector[j];
-                        vector[j] = temp;
-                    }
-                }
-            }
-            return vector;
-        }
+
+        Integer[] reverseSort = Arrays.stream(sortedArray).boxed().toArray(Integer[]::new);
+        Arrays.sort(reverseSort, Collections.reverseOrder());
+
+        for (int i = 0; i < sortedArray.length; i++) sortedArray[i] = reverseSort[i];
+
+        return sortedArray;
     }
 
-    //TODO: alinea m)
+    public boolean isEmpty() {
+        return vector.length == 0;
+    }
+
+    public boolean hasOneElement() {
+        return vector.length == 1;
+    }
+
+    public boolean hasEvenElements() {
+        return getEvenNumbersLength() != 0;
+    }
+
+    public boolean hasOddElements() {
+        return getOddNumbersLength() != 0;
+    }
+
+    public boolean hasDuplicates() {
+        return countDuplicates() > 0;
+    }
+
+    private int countDuplicates() {
+        int count = 0;
+        for (int i = 0; i < vector.length; i++) {
+            for (int j = 1; j < vector.length; j++) {
+                if (i == j) continue;
+                if (vector[i] == vector[j]) count++;
+            }
+        }
+
+        return count;
+    }
+
+    //TODO: s)
+
+    //TODO: t)
+
+    //TODO: u)
+
+    //TODO: v)
 }
