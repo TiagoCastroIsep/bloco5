@@ -1,10 +1,7 @@
 package org.example;
 
 import java.lang.reflect.MalformedParametersException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -210,9 +207,82 @@ public class Vector {
         return count;
     }
 
-    //TODO: s)
+    /**START: s) **/
+    protected int getDigitsCount(int number) {
+        if (number == 0) return 1;
+        int count = 0;
+        while (number != 0) {
+            count++;
+            number /= 10;
+        }
+        return count;
+    }
 
-    //TODO: t)
+    protected double getDigitsAverage() {
+        if (vector.length == 0) return -1.0;
+        int sum = 0;
+        for (int number : vector) sum += getDigitsCount(number);
+        return (double) sum / vector.length;
+    }
+
+    public int[] getNumbersWithDigitsBiggerThanAverageDigits() {
+        double average = getDigitsAverage();
+        if (average == -1.0) return null;
+        List<Integer> result = new ArrayList<>();
+        for (int number : vector) {
+            if (getDigitsCount(number) > average) {
+                result.add(number);
+            }
+        }
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+    /** END: s) **/
+
+    /** START: t) **/
+    protected int[] getDigits(int number) {
+        if (number == 0) return new int[] {0};
+        List<Integer> result = new ArrayList<>();
+        while (number != 0) {
+            result.add(number % 10);
+            number /= 10;
+        }
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    protected int[] getEvenDigitsInVector(int[] array) {
+        if (array.length == 0) throw new MalformedParametersException("Array can't be empty");
+        List<Integer> result = new ArrayList<>();
+        for (int number : array) {
+            int[] digits = getDigits(number);
+            for (int digit : digits) if (digit % 2 == 0) result.add(digit);
+        }
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private int getDigitsCountFromVector() {
+        int count = 0;
+        for (int number : vector) count += getDigits(number).length;
+        return count;
+    }
+
+    private double getAverageEvenDigits(int[] array, int totalCount) {
+        return (double) getEvenDigitsInVector(array).length / totalCount;
+    }
+
+    public int[] getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits() {
+        double averageEvenDigitsInVector = getAverageEvenDigits(vector, getDigitsCountFromVector());
+        List<Integer> result = new ArrayList<>();
+        for (int number : vector) {
+            int[] currentElementDigits = getDigits(number);
+            if (getAverageEvenDigits(currentElementDigits, currentElementDigits.length) > averageEvenDigitsInVector) {
+                result.add(number);
+            }
+        }
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+    /** END: t) **/
 
     //TODO: u)
 

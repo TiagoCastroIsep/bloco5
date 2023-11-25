@@ -540,4 +540,159 @@ class VectorTest {
         Vector vector = new Vector(array);
         assertFalse(vector.hasDuplicates());
     }
+
+    @Test
+    public void shouldReturnOneForNumberZero() {
+        int[] array = {0, 2, 3, 4};
+        Vector vector = new Vector(array);
+        int expected = 1;
+        assertEquals(expected, vector.getDigitsCount(array[0]));
+    }
+
+    @Test
+    public void shouldReturnOneForNumberWithOneDigit() {
+        int[] array = {0, 2, 3, 4};
+        Vector vector = new Vector(array);
+        int expected = 1;
+        assertEquals(expected, vector.getDigitsCount(array[1]));
+    }
+
+    @Test
+    public void shouldReturnTwoForNumberWithTwoDigits() {
+        int[] array = {10, 2, 3, 4};
+        Vector vector = new Vector(array);
+        int expected = 2;
+        assertEquals(expected, vector.getDigitsCount(array[0]));
+    }
+
+    @Test
+    public void shouldReturnMinusOneForEmptyVector() {
+        Vector vector = new Vector();
+        double expected = -1.0;
+        assertEquals(expected, vector.getDigitsAverage());
+    }
+
+    @Test
+    public void shouldReturnOneForVectorWithAllZeros() {
+        int[] array = {0, 0, 0, 0};
+        Vector vector = new Vector(array);
+        double expected = 1.0;
+        assertEquals(expected, vector.getDigitsAverage());
+    }
+
+    @Test
+    public void shouldReturnOneForVectorWithNumbersWithOneDigit() {
+        int[] array = {0, 2, 3, 9};
+        Vector vector = new Vector(array);
+        double expected = 1.0;
+        assertEquals(expected, vector.getDigitsAverage());
+    }
+
+    @Test
+    public void shouldReturnTwoForVectorWithNumbersWithTwoDigits() {
+        int[] array = {10, 20, 30, 99};
+        Vector vector = new Vector(array);
+        double expected = 2.0;
+        assertEquals(expected, vector.getDigitsAverage());
+    }
+
+    @Test
+    public void shouldReturnCorrectValueVectorWithMixedNumbersSize() {
+        int[] array = {10, 2, 3, 99};
+        Vector vector = new Vector(array);
+        double expected = 1.5;
+        assertEquals(expected, vector.getDigitsAverage());
+    }
+
+    @Test
+    public void shouldReturnNumbersWithMoreDigitsThanAverageDigitsInArray() {
+        int[] array = {10, 2, 3, 99};
+        Vector vector = new Vector(array);
+        int[] expected = {10, 99};
+        assertArrayEquals(expected, vector.getNumbersWithDigitsBiggerThanAverageDigits());
+    }
+
+    @Test
+    public void shouldReturnEmptyArrayForNoneDigitsBiggerThanAverageDigitsInArray() {
+        int[] array = {1, 2, 3, 9};
+        Vector vector = new Vector(array);
+        int[] expected = {};
+        assertArrayEquals(expected, vector.getNumbersWithDigitsBiggerThanAverageDigits());
+    }
+
+    @Test
+    public void shouldReturnNullForEmptyArrayInDigitsBiggerThanAverageDigitsInArray() {
+        Vector vector = new Vector();
+        assertNull(vector.getNumbersWithDigitsBiggerThanAverageDigits());
+    }
+
+    @Test
+    public void shouldReturnArrayWithOneElementFor1DigitNumber() {
+        int number = 0;
+        Vector vector = new Vector();
+        int[] expected = {0};
+        assertArrayEquals(expected, vector.getDigits(number));
+    }
+
+    @Test
+    public void shouldReturnArrayWithOneElementForNumber1() {
+        int number = 1;
+        Vector vector = new Vector();
+        int[] expected = {1};
+        assertArrayEquals(expected, vector.getDigits(number));
+    }
+
+    @Test
+    public void shouldReturnArrayWithTwoElementsFor2DigitsNumber() {
+        int number = 10;
+        Vector vector = new Vector();
+        int[] expected = {0, 1};
+        assertArrayEquals(expected, vector.getDigits(number));
+    }
+
+    @Test
+    public void shouldReturnThrowExceptionForEmptyVector_getEvenDigitsInVector() {
+        Vector vector = new Vector();
+        assertThrows(MalformedParametersException.class, () -> vector.getEvenDigitsInVector(vector.getVector()));
+    }
+
+    @Test
+    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits1DigitNumbers() {
+        int[] array = {0, 1, 2, 3};
+        Vector vector = new Vector(array);
+        int[] expected = {0, 2};
+        assertArrayEquals(expected, vector.getEvenDigitsInVector(array));
+    }
+
+    @Test
+    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits2DigitNumbers() {
+        int[] array = {10, 13, 21, 31};
+        Vector vector = new Vector(array);
+        int[] expected = {0, 2};
+        assertArrayEquals(expected, vector.getEvenDigitsInVector(array));
+    }
+
+    @Test
+    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVector() {
+        int[] array = {10, 13, 21, 2222};
+        Vector vector = new Vector(array);
+        int[] expected = {2222};
+        assertArrayEquals(expected, vector.getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits());
+    }
+
+    @Test
+    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVectorWithOneElementBeingZero() {
+        int[] array = {0, 13, 21, 2222};
+        Vector vector = new Vector(array);
+        int[] expected = {0, 2222};
+        assertArrayEquals(expected, vector.getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits());
+    }
+
+    @Test
+    public void shouldReturnArrayWithEvenDigitsCountEqualsThanAverageOfEvenDigitsInVector() {
+        int[] array = {21, 21, 21, 21};
+        Vector vector = new Vector(array);
+        int[] expected = {};
+        assertArrayEquals(expected, vector.getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits());
+    }
 }
