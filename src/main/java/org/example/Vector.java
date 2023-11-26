@@ -299,6 +299,15 @@ public class Vector {
     }
     /** END: t) **/
 
+    public int[] reversedOrder() {
+        if (vector.length == 0) throw new IllegalArgumentException();
+        int[] reversedVector = new int[vector.length];
+        for (int i = 0, j = vector.length - 1; i < vector.length; i++, j--) {
+            reversedVector[i] = vector[j];
+        }
+        return reversedVector;
+    }
+
     //TODO: v)
     //TODO: w)
     //TODO: x)

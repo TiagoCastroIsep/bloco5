@@ -103,6 +103,95 @@ public class BiDimensionalVector {
         return vector.indexOf(vector.getMax());
     }
 
-    //TODO: l)
+    public boolean checkIfMatrixIsSquare() {
+        if (biDimensionalVector.length == 0) return false;
+        if (!checkIfMatrixIsRegular()) return false;
 
+        for (int[] row : biDimensionalVector) {
+            if (row.length != biDimensionalVector.length) return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkIfMatrixIsRegular() {
+        if (biDimensionalVector.length == 0) return false;
+
+        int firstRowLength = biDimensionalVector[0].length;
+        for (int i = 1; i < biDimensionalVector.length; i++) {
+            if (biDimensionalVector[i].length != firstRowLength) return false;
+        }
+
+        return true;
+    }
+
+    public boolean isSymmetrical() {
+        if (!checkIfMatrixIsSquare()) return false;
+
+        for (int row = 0, column = 1; row < biDimensionalVector.length; row++, column++) {
+            if (biDimensionalVector[row][column] != biDimensionalVector[row + 1][column - 1]) {
+                return false;
+            }
+            row++;
+            column++;
+        }
+        return true;
+    }
+
+    public int countNotZeroPrincipalDiagonal() {
+        if (biDimensionalVector.length == 0) return -1;
+        if (!checkIfMatrixIsSquare()) return -1;
+        int count = 0;
+        for (int i = 0; i < biDimensionalVector.length; i++) {
+            if (biDimensionalVector[i][i] != 0) count++;
+        }
+        return count;
+    }
+
+    public boolean isPrincipalDiagonalEqualsSecondaryDiagonal() {
+        if (biDimensionalVector.length == 0) return false;
+        if (!checkIfMatrixIsSquare()) return false;
+        List<Integer> principalDiagonal = getPrincipalDiagonalElements();
+        List<Integer> secondDiagonal = getSecondDiagonalElements();
+
+        return principalDiagonal.equals(secondDiagonal);
+    }
+
+    private List<Integer> getPrincipalDiagonalElements() {
+        List<Integer> principalDiagonal = new ArrayList<>();
+        for (int i = 0; i < biDimensionalVector.length; i++) {
+            principalDiagonal.add(biDimensionalVector[i][i]);
+        }
+        return principalDiagonal;
+    }
+
+    private List<Integer> getSecondDiagonalElements() {
+        List<Integer> secondDiagonal = new ArrayList<>();
+        for (int i = biDimensionalVector.length - 1, j = 0; i >= 0; i--, j++) {
+            secondDiagonal.add(biDimensionalVector[j][i]);
+        }
+        return secondDiagonal;
+    }
+    //TODO: p)
+    //TODO: q)
+
+    public int[][] invertValuesEachRow() {
+        if (biDimensionalVector.length == 0) throw new IllegalArgumentException();
+        if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
+
+        int[][] reversedMatrix = new int[biDimensionalVector.length][biDimensionalVector[0].length];
+        int index = 0;
+        for (int[] row : biDimensionalVector) {
+            Vector vector = new Vector(row);
+            reversedMatrix[index] = vector.reversedOrder();
+            index++;
+        }
+
+        return reversedMatrix;
+    }
+
+    //TODO: s)
+    //TODO: t)
+    //TODO: u)
+    //TODO: v)
 }

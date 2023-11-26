@@ -720,4 +720,18 @@ class VectorTest {
         int[] expected = {};
         assertArrayEquals(expected, vector.getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits());
     }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayToReverse() {
+        Vector vector = new Vector();
+        assertThrows(IllegalArgumentException.class, vector::reversedOrder);
+    }
+
+    @Test
+    public void shouldReturnReversedOrderArray() {
+        int[] array = {1, 2, 3};
+        Vector vector = new Vector(array);
+        int[] expected = {3, 2, 1};
+        assertArrayEquals(expected, vector.reversedOrder());
+    }
 }

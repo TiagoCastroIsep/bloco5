@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.function.BinaryOperator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BiDimensionalVectorTest {
@@ -338,5 +340,251 @@ class BiDimensionalVectorTest {
         int expected = 0;
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
         assertEquals(expected, biDimensionalVector.getRowIndexFromMaxSum());
+    }
+
+    @Test
+    public void shouldReturnTrueForSquareMatrix() {
+        int[][] matrix = {
+                {1, 2},
+                {1, 2}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertTrue(biDimensionalVector.checkIfMatrixIsSquare());
+    }
+
+    @Test
+    public void shouldReturnFalseForEmptyMatrix() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+    }
+
+    @Test
+    public void shouldReturnFalseForMatrixWhichIsRectangular() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {1, 2, 4}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+    }
+
+    @Test
+    public void shouldReturnFalseForMatrixWhichIsNotRegular() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {1, 2}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+    }
+
+    @Test
+    public void shouldReturnFalseForEmptyMatrix_checkRegular() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+    }
+
+    @Test
+    public void shouldReturnFalseForMatrixWithDifferentNumberOfColumns() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {1, 2},
+                {1, 2, 3, 4}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.checkIfMatrixIsRegular());
+    }
+
+    @Test
+    public void shouldReturnTrueForRegularMatrix() {
+        int[][] matrix = {
+                {1, 2, 3},
+                {1, 2, 3},
+                {1, 2, 3}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertTrue(biDimensionalVector.checkIfMatrixIsRegular());
+    }
+
+    @Test
+    public void shouldReturnFalseForEmptyMatrix_regularMatrix() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertFalse(biDimensionalVector.checkIfMatrixIsRegular());
+    }
+
+    @Test
+    public void shouldReturnFalseForNotSymmetrical2x2Matrix() {
+        int[][] matrix = {
+                {1, 2},
+                {3, 3}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.isSymmetrical());
+    }
+
+    @Test
+    public void shouldReturnFalseForNotSquareMatrix() {
+        int[][] matrix = {
+                {1, 2},
+                {3}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.isSymmetrical());
+    }
+
+    @Test
+    public void shouldReturnFalseForNotSymmetricalMatrix() {
+        int[][] matrix = {
+                {1, 2, 3, 4},
+                {3, 3, 3, 3},
+                {2, 2, 2, 2},
+                {1, 1, 1, 1},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertFalse(biDimensionalVector.isSymmetrical());
+    }
+
+    @Test
+    public void shouldReturnTrueForSymmetrical2x2Matrix() {
+        int[][] matrix = {
+                {1, 2},
+                {2, 3}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertTrue(biDimensionalVector.isSymmetrical());
+    }
+
+    @Test
+    public void shouldReturnTrueForSymmetricalMatrix() {
+        int[][] matrix = {
+                {1, 3, 2, 4},
+                {3, 3, 3, 3},
+                {2, 2, 2, 2},
+                {4, 3, 2, 1},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
+        assertTrue(biDimensionalVector.isSymmetrical());
+    }
+
+    @Test
+    public void shouldReturnMinusOneForEmptyArray() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        int expected = -1;
+        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+    }
+
+    @Test
+    public void shouldReturnMinusOneForNotSquareArray() {
+        int[][] array = {
+                {1, 2},
+                {3, 4},
+                {5, 6}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int expected = -1;
+        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+    }
+
+    @Test
+    public void shouldReturnOneForOneElementDifferentThanZeroInPrincipalDiagonal() {
+        int[][] array = {
+                {1, 2},
+                {3, 0},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int expected = 1;
+        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+    }
+
+    @Test
+    public void shouldReturnTwoForElementsDifferentThanZeroInPrincipalDiagonal() {
+        int[][] array = {
+                {1, 2},
+                {3, 1},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int expected = 2;
+        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+    }
+
+    @Test
+    public void shouldReturnFalseForEmptyArray() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+    }
+
+    @Test
+    public void shouldReturnFalseForNotSquareMatrix_principalSecondaryDiagonal() {
+        int[][] array = {
+                {1, 2},
+                {3, 4},
+                {5, 6}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+    }
+
+    @Test
+    public void shouldReturnFalseForMatrixPrincipalAndSecondaryDiagonalDifferent_principalSecondaryDiagonal() {
+        int[][] array = {
+                {1, 1},
+                {1, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+    }
+
+    @Test
+    public void shouldReturnTrueForMatrixPrincipalAndSecondaryDiagonalEqual_principalSecondaryDiagonal() {
+        int[][] array = {
+                {1, 1},
+                {2, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertTrue(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayOnInvertedValuesForEachMatrixRow() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertThrows(IllegalArgumentException.class, biDimensionalVector::invertValuesEachRow);
+    }
+
+    @Test
+    public void shouldThrowExceptionForNotRegularArrayOnInvertedValuesForEachMatrixRow() {
+        int[][] array = {
+                {1, 1},
+                {2, 2, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertThrows(IllegalArgumentException.class, biDimensionalVector::invertValuesEachRow);
+    }
+
+    @Test
+    public void shouldReturnInvertedValuesForEachMatrixRow() {
+        int[][] array = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {3, 2, 1},
+                {6, 5, 4}
+        };
+        assertArrayEquals(expected, biDimensionalVector.invertValuesEachRow());
+    }
+
+    @Test
+    public void shouldReturnInvertedValuesForEachMatrixRowOnlyOneElement() {
+        int[][] array = {
+                {0},
+                {0}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {0},
+                {0}
+        };
+        assertArrayEquals(expected, biDimensionalVector.invertValuesEachRow());
     }
 }
