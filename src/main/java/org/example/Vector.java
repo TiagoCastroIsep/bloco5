@@ -28,6 +28,19 @@ public class Vector {
         return vector[index];
     }
 
+    public int indexOf(int number) {
+        if (vector.length == 0) throw new NullPointerException();
+        int index = 0;
+        for (int currentValue : vector) {
+            if (number == currentValue) break;
+            index++;
+        }
+
+        if (index == vector.length) return -1;
+
+        return index;
+    }
+
     public int[] add(int number) {
         int[] extendedVector = new int[vector.length + 1];
         for (int i = 0; i < vector.length; i++) extendedVector[i] = vector[i];
@@ -250,6 +263,7 @@ public class Vector {
         return result.stream().mapToInt(Integer::intValue).toArray();
     }
 
+    /** START: u) **/
     protected int[] getEvenDigitsInVector(int[] array) {
         if (array.length == 0) throw new MalformedParametersException("Array can't be empty");
         List<Integer> result = new ArrayList<>();
@@ -259,6 +273,7 @@ public class Vector {
         }
         return result.stream().mapToInt(Integer::intValue).toArray();
     }
+    /** END: u) **/
 
     private int getDigitsCountFromVector() {
         int count = 0;
@@ -284,7 +299,10 @@ public class Vector {
     }
     /** END: t) **/
 
-    //TODO: u)
-
     //TODO: v)
+    //TODO: w)
+    //TODO: x)
+    //TODO: y)
+    //TODO: z)
+    //TODO: aa)
 }

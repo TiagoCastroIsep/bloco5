@@ -1,8 +1,19 @@
 package playground;
 
+import org.example.BiDimensionalVector;
+
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
+
         System.out.println(-4 % 2);
+        int[][] biVector = {
+                {1, 2, 3},
+                {1, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(biVector);
+        System.out.println(Arrays.deepToString(biDimensionalVector.addToRow(1, 4)));
     }
 
     // sorting algorithms

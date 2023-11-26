@@ -59,6 +59,31 @@ class VectorTest {
     }
 
     @Test
+    public void shouldReturnExceptionForEmptyArray_indexOf() {
+        Vector vector = new Vector(); // empty constructor sets array as empty
+        int number = 0;
+        assertThrows(NullPointerException.class, () -> vector.indexOf(number));
+    }
+
+    @Test
+    public void shouldReturnCorrectIndexFromNumberProvided_indexOf() {
+        int[] array = {0, 2, 3};
+        Vector vector = new Vector(array);
+        int number = 2;
+        int expected = 1;
+        assertEquals(expected, vector.indexOf(number));
+    }
+
+    @Test
+    public void shouldReturnNoneIndexFromNumberProvidedNotExisting_indexOf() {
+        int[] array = {0, 2, 3};
+        Vector vector = new Vector(array);
+        int number = 1;
+        int expected = -1;
+        assertEquals(expected, vector.indexOf(number));
+    }
+
+    @Test
     public void shouldAddNumberOneToVectorAtLastPosition() {
         int[] array = {1, 2, 3};
         Vector vector = new Vector(array);
