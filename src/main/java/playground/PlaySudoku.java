@@ -33,7 +33,7 @@ public class PlaySudoku {
                 {9, 0, 4, 5, 0, 0, 0, 0, 1}
         };
 
-        Card sudokuCard = new Card(gameMatrix, gameMatrix.length);
+        Card sudokuCard = new Card(gameMatrix);
         Game sudokuGame = new Game(sudokuCard);
         Player playerOne = new Player(sudokuCard);
 

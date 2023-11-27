@@ -26,11 +26,13 @@ public class Player {
     }
 
     private boolean checkPlayedNumberIsRepeated(int row, int column, int numberPlayed) {
-        for (int i = 0; i < card.getGameMatrixSize() + 1; i++) {
+        int index = 0; //changed to while to kill the mutation
+        while (index != card.getGameMatrixSize()) {
             //row
-            if (card.getCardMatrix()[row][i] == numberPlayed) return true;
+            if (card.getCardMatrix()[row][index] == numberPlayed) return true;
             //column
-            if (card.getCardMatrix()[i][column] == numberPlayed) return true;
+            if (card.getCardMatrix()[index][column] == numberPlayed) return true;
+            index++;
         }
 
         return false;
@@ -38,7 +40,7 @@ public class Player {
 
     private boolean validatePlayerChoice(int row, int column) {
         if (row < 0 || column < 0) return false;
-        if (row > card.getGameMatrixSize() || column > card.getGameMatrixSize()) return false;
+        if (row >= card.getGameMatrixSize() || column >= card.getGameMatrixSize()) return false;
         return card.getInitialCardMaskMatrix()[row][column] == 0;
     }
 

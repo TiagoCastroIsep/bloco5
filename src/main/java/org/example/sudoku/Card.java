@@ -4,9 +4,9 @@ public class Card {
     private final int gameMatrixSize;
     private final int[][] cardMatrix;
 
-    public Card(int[][] cardMatrix, int gameMatrixSize) {
+    public Card(int[][] cardMatrix) {
         this.cardMatrix = cardMatrix;
-        this.gameMatrixSize = gameMatrixSize - 1;
+        this.gameMatrixSize = cardMatrix.length;
     }
 
     public int[][] getCardMatrix() {
@@ -23,9 +23,12 @@ public class Card {
 
     public int[][] getInitialCardMaskMatrix() {
         int[][] initialCardMaskMatrix = new int[cardMatrix.length][cardMatrix.length];
-        for (int i = 0; i < gameMatrixSize + 1; i++)
-            for (int j = 0; j < gameMatrixSize + 1; j++)
-                if (cardMatrix[i][j] > 0) initialCardMaskMatrix[i][j] = cardMatrix[i][j];
+        for (int i = 0; i < gameMatrixSize; i++)
+            for (int j = 0; j < gameMatrixSize; j++)
+                if (cardMatrix[i][j] > 0) {
+                    if (cardMatrix[i][j] == 0) break; //added to kill a mutation
+                    initialCardMaskMatrix[i][j] = cardMatrix[i][j];
+                }
         return initialCardMaskMatrix;
     }
 
