@@ -75,15 +75,15 @@ public class Vector {
         return minVal;
     }
 
-    protected double getAverage(int[] array) {
-        if (vector.length == 0) throw new ArithmeticException("Cannot divide by zero");
+    protected double getAverage(int[] array) throws EmptyArrayException {
+        if (vector.length == 0) throw new EmptyArrayException();
         int sum = 0;
         for (int value : array) sum += value;
         return (double) sum / array.length;
     }
 
-    protected int[] getEvenNumbers() {
-        if (vector.length == 0) throw new MalformedParametersException("Array can't be empty");
+    protected int[] getEvenNumbers() throws EmptyArrayException {
+        if (vector.length == 0) throw new EmptyArrayException("Array can't be empty");
         int arrayLength = getEvenNumbersLength();
         int[] evenNumbersArray = new int[arrayLength];
         for (int i = 0, currIndex = 0; i < vector.length; i++) {
@@ -113,7 +113,7 @@ public class Vector {
         return count;
     }
 
-    public double getAverageEvenNumbers() {
+    public double getAverageEvenNumbers() throws EmptyArrayException {
         return getAverage(getEvenNumbers());
     }
 
@@ -141,13 +141,13 @@ public class Vector {
         return count;
     }
 
-    public double getAverageOddNumbers() {
+    public double getAverageOddNumbers() throws EmptyArrayException {
         int[] oddNumbers = getOddNumbers();
         return oddNumbers.length > 0 ? getAverage(oddNumbers) : 0.0;
     }
 
-    protected int[] getMultiplesOfNumber(int number) {
-        if (vector.length == 0) throw new ArithmeticException("Cannot divide by zero");
+    protected int[] getMultiplesOfNumber(int number) throws EmptyArrayException {
+        if (vector.length == 0) throw new EmptyArrayException("Cannot divide by zero");
         if (number == 0) return vector;
 
         int[] multiples = new int[getMultiplesLength(number)];
@@ -166,7 +166,7 @@ public class Vector {
         return count;
     }
 
-    public double getAverageOfMultiples(int number) {
+    public double getAverageOfMultiples(int number) throws EmptyArrayException {
         return getAverage(getMultiplesOfNumber(number));
     }
 
@@ -264,8 +264,8 @@ public class Vector {
     }
 
     /** START: u) **/
-    protected int[] getEvenDigitsInVector(int[] array) {
-        if (array.length == 0) throw new MalformedParametersException("Array can't be empty");
+    protected int[] getEvenDigitsInVector(int[] array) throws EmptyArrayException {
+        if (array.length == 0) throw new EmptyArrayException("Array can't be empty");
         List<Integer> result = new ArrayList<>();
         for (int number : array) {
             int[] digits = getDigits(number);
@@ -281,11 +281,11 @@ public class Vector {
         return count;
     }
 
-    private double getAverageEvenDigits(int[] array, int totalCount) {
+    private double getAverageEvenDigits(int[] array, int totalCount) throws EmptyArrayException {
         return (double) getEvenDigitsInVector(array).length / totalCount;
     }
 
-    public int[] getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits() {
+    public int[] getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits() throws EmptyArrayException {
         double averageEvenDigitsInVector = getAverageEvenDigits(vector, getDigitsCountFromVector());
         List<Integer> result = new ArrayList<>();
         for (int number : vector) {
@@ -299,8 +299,8 @@ public class Vector {
     }
     /** END: t) **/
 
-    public int[] reversedOrder() {
-        if (vector.length == 0) throw new IllegalArgumentException();
+    public int[] reversedOrder() throws EmptyArrayException {
+        if (vector.length == 0) throw new EmptyArrayException();
         int[] reversedVector = new int[vector.length];
         for (int i = 0, j = vector.length - 1; i < vector.length; i++, j--) {
             reversedVector[i] = vector[j];

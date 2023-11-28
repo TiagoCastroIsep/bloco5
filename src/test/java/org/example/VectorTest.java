@@ -223,7 +223,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnAverageFromVectorPositiveValues() {
+    public void shouldReturnAverageFromVectorPositiveValues() throws EmptyArrayException {
         int[] array = {1, 2, 3};
         Vector vector = new Vector(array);
         double expected = 2.0;
@@ -231,7 +231,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnAverageFromVectorNegativeValues() {
+    public void shouldReturnAverageFromVectorNegativeValues() throws EmptyArrayException {
         int[] array = {-1, -2, -3};
         Vector vector = new Vector(array);
         double expected = -2.0;
@@ -239,7 +239,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnAverageFromVectorWithAllZeroValues() {
+    public void shouldReturnAverageFromVectorWithAllZeroValues() throws EmptyArrayException {
         int[] array = {0, 0, 0};
         Vector vector = new Vector(array);
         double expected = 0;
@@ -250,11 +250,11 @@ class VectorTest {
     public void shouldReturnExceptionFromEmptyVector_getAverageMethod() {
         int[] array = {};
         Vector vector = new Vector(array);
-        assertThrows(ArithmeticException.class, () -> vector.getAverage(array));
+        assertThrows(EmptyArrayException.class, () -> vector.getAverage(array));
     }
 
     @Test
-    public void shouldReturnEvensArrayForAllPositiveNumbers() {
+    public void shouldReturnEvensArrayForAllPositiveNumbers() throws EmptyArrayException {
         int[] array = {1, 2, 3, 4};
         Vector vector = new Vector(array);
         int[] expected = {2, 4};
@@ -262,7 +262,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvensArrayForAllPositiveNumbersAndOneZero() {
+    public void shouldReturnEvensArrayForAllPositiveNumbersAndOneZero() throws EmptyArrayException {
         int[] array = {1, 2, 0, 4};
         Vector vector = new Vector(array);
         int[] expected = {2, 0, 4};
@@ -270,7 +270,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvensArrayForAllNegativeNumbers() {
+    public void shouldReturnEvensArrayForAllNegativeNumbers() throws EmptyArrayException {
         int[] array = {-1, -2, -3, -4};
         Vector vector = new Vector(array);
         int[] expected = {-2, -4};
@@ -278,7 +278,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvensArrayForAllZeros() {
+    public void shouldReturnEvensArrayForAllZeros() throws EmptyArrayException {
         int[] array = {0, 0, 0, 0};
         Vector vector = new Vector(array);
         int[] expected = {0, 0, 0, 0};
@@ -286,7 +286,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvenNumbersAverageFromVectorPositiveValues() {
+    public void shouldReturnEvenNumbersAverageFromVectorPositiveValues() throws EmptyArrayException {
         int[] array = {1, 2, 3, 4};
         Vector vector = new Vector(array);
         double expected = 3;
@@ -294,7 +294,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvenNumbersAverageFromVectorNegativeValues() {
+    public void shouldReturnEvenNumbersAverageFromVectorNegativeValues() throws EmptyArrayException {
         int[] array = {-1, -2, -3, -4};
         Vector vector = new Vector(array);
         double expected = -3.0;
@@ -302,7 +302,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEvenNumbersAverageFromVectorWithAllZeroValues() {
+    public void shouldReturnEvenNumbersAverageFromVectorWithAllZeroValues() throws EmptyArrayException {
         int[] array = {0, 0, 0};
         Vector vector = new Vector(array);
         double expected = 0;
@@ -312,7 +312,7 @@ class VectorTest {
     @Test
     public void shouldReturnExceptionFromEmptyVector_getAverageEvenNumbers() {
         Vector vector = new Vector();
-        assertThrows(MalformedParametersException.class, vector::getAverageEvenNumbers);
+        assertThrows(EmptyArrayException.class, vector::getAverageEvenNumbers);
     }
     /** START: odds **/
     @Test
@@ -348,7 +348,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnOddNumbersAverageFromVectorPositiveValues() {
+    public void shouldReturnOddNumbersAverageFromVectorPositiveValues() throws EmptyArrayException {
         int[] array = {1, 2, 3, 4};
         Vector vector = new Vector(array);
         double expected = 2.0;
@@ -356,7 +356,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnOddNumbersAverageFromVectorNegativeValues() {
+    public void shouldReturnOddNumbersAverageFromVectorNegativeValues() throws EmptyArrayException {
         int[] array = {-1, -2, -3, -4};
         Vector vector = new Vector(array);
         double expected = -2.0;
@@ -364,7 +364,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnOddNumbersAverageFromVectorWithAllZeroValues() {
+    public void shouldReturnOddNumbersAverageFromVectorWithAllZeroValues() throws EmptyArrayException {
         int[] array = {0, 0, 0};
         Vector vector = new Vector(array);
         double expected = 0.0;
@@ -378,7 +378,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnMultiplesOfNumberZero() {
+    public void shouldReturnMultiplesOfNumberZero() throws EmptyArrayException {
         int[] array = {1, 2, 3, 4};
         Vector vector = new Vector(array);
         int number = 0;
@@ -387,7 +387,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnMultiplesOfNumberTwo() {
+    public void shouldReturnMultiplesOfNumberTwo() throws EmptyArrayException {
         int[] array = {1, 2, 3, 4};
         Vector vector = new Vector(array);
         int number = 2;
@@ -399,11 +399,11 @@ class VectorTest {
     public void shouldThrowExceptionForEmptyVector_getMultiplesOfNumber() {
         Vector vector = new Vector();
         int number = 2;
-        assertThrows(ArithmeticException.class, () -> vector.getMultiplesOfNumber(number));
+        assertThrows(EmptyArrayException.class, () -> vector.getMultiplesOfNumber(number));
     }
 
     @Test
-    public void shouldReturnAverageOfMultiplesOfNumberTwo() {
+    public void shouldReturnAverageOfMultiplesOfNumberTwo() throws EmptyArrayException {
         int[] array = {0, 1, 2, 3, 4};
         Vector vector = new Vector(array);
         int number = 2;
@@ -412,7 +412,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnAverageOfMultiplesOfNumberZero() {
+    public void shouldReturnAverageOfMultiplesOfNumberZero() throws EmptyArrayException {
         int[] array = {0, 1, 2, 3, 4};
         Vector vector = new Vector(array);
         int number = 0;
@@ -420,7 +420,7 @@ class VectorTest {
         assertEquals(expected, vector.getAverageOfMultiples(number));
     }
     @Test
-    public void shouldReturnAverageOfMultiplesOfNumberTwoOnNegativesArray() {
+    public void shouldReturnAverageOfMultiplesOfNumberTwoOnNegativesArray() throws EmptyArrayException {
         int[] array = {0, -1, -2, -3, -4};
         Vector vector = new Vector(array);
         int number = 0;
@@ -678,11 +678,11 @@ class VectorTest {
     @Test
     public void shouldReturnThrowExceptionForEmptyVector_getEvenDigitsInVector() {
         Vector vector = new Vector();
-        assertThrows(MalformedParametersException.class, () -> vector.getEvenDigitsInVector(vector.getVector()));
+        assertThrows(EmptyArrayException.class, () -> vector.getEvenDigitsInVector(vector.getVector()));
     }
 
     @Test
-    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits1DigitNumbers() {
+    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits1DigitNumbers() throws EmptyArrayException {
         int[] array = {0, 1, 2, 3};
         Vector vector = new Vector(array);
         int[] expected = {0, 2};
@@ -690,7 +690,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits2DigitNumbers() {
+    public void shouldReturnArrayWithJustTheEvenDigitsFromAllVectorDigits2DigitNumbers() throws EmptyArrayException {
         int[] array = {10, 13, 21, 31};
         Vector vector = new Vector(array);
         int[] expected = {0, 2};
@@ -698,7 +698,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVector() {
+    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVector() throws EmptyArrayException {
         int[] array = {10, 13, 21, 2222};
         Vector vector = new Vector(array);
         int[] expected = {2222};
@@ -706,7 +706,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVectorWithOneElementBeingZero() {
+    public void shouldReturnArrayWithEvenDigitsCountGreaterThanAverageOfEvenDigitsInVectorWithOneElementBeingZero() throws EmptyArrayException {
         int[] array = {0, 13, 21, 2222};
         Vector vector = new Vector(array);
         int[] expected = {0, 2222};
@@ -714,7 +714,7 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithEvenDigitsCountEqualsThanAverageOfEvenDigitsInVector() {
+    public void shouldReturnArrayWithEvenDigitsCountEqualsThanAverageOfEvenDigitsInVector() throws EmptyArrayException {
         int[] array = {21, 21, 21, 21};
         Vector vector = new Vector(array);
         int[] expected = {};
@@ -724,11 +724,11 @@ class VectorTest {
     @Test
     public void shouldThrowExceptionForEmptyArrayToReverse() {
         Vector vector = new Vector();
-        assertThrows(IllegalArgumentException.class, vector::reversedOrder);
+        assertThrows(EmptyArrayException.class, vector::reversedOrder);
     }
 
     @Test
-    public void shouldReturnReversedOrderArray() {
+    public void shouldReturnReversedOrderArray() throws EmptyArrayException {
         int[] array = {1, 2, 3};
         Vector vector = new Vector(array);
         int[] expected = {3, 2, 1};
