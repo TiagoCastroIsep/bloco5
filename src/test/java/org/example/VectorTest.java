@@ -671,7 +671,7 @@ class VectorTest {
     public void shouldReturnArrayWithTwoElementsFor2DigitsNumber() {
         int number = 10;
         Vector vector = new Vector();
-        int[] expected = {0, 1};
+        int[] expected = {1, 0};
         assertArrayEquals(expected, vector.getDigits(number));
     }
 
@@ -728,10 +728,157 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnReversedOrderArray() throws EmptyArrayException {
+    public void shouldReturnReversedOrderArray() {
         int[] array = {1, 2, 3};
         Vector vector = new Vector(array);
         int[] expected = {3, 2, 1};
         assertArrayEquals(expected, vector.reversedOrder());
+    }
+
+    @Test
+    public void shouldReturnAscendingSequencesForSingleDigits() {
+        int[] array = {1, 2, 3, 4};
+        int minNumberElements = 0;
+        Vector vector = new Vector(array);
+        assertArrayEquals(array, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldReturnAscendingSequencesForMoreThanOneDigits() {
+        int[] array = {10, 21, 33, 43};
+        int minNumberElements = 0;
+        Vector vector = new Vector(array);
+        int[] expected = {};
+        assertArrayEquals(expected, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldReturnAscendingSequencesForMoreThanOneDigitsAtThreeDigitNumberNotAsc() {
+        int[] array = {10, 21, 33, 34, 445};
+        int minNumberElements = 0;
+        Vector vector = new Vector(array);
+        int[] expected = {34};
+        assertArrayEquals(expected, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldReturnAscendingSequencesForMoreThanOneDigitsAtThreeDigitNumberAsc() {
+        int[] array = {10, 21, 33, 34, 456};
+        int minNumberElements = 0;
+        Vector vector = new Vector(array);
+        int[] expected = {34, 456};
+        assertArrayEquals(expected, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldReturnAscendingSequencesForMoreThanOneDigitsAtThreeDigitNumberAscNIsThree() {
+        int[] array = {10, 21, 33, 34, 456};
+        int minNumberElements = 3;
+        Vector vector = new Vector(array);
+        int[] expected = {456};
+        assertArrayEquals(expected, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldReturnEmptyArrayForNoneAscendingSequences() {
+        int[] array = {10, 21, 32, 43};
+        int minNumberElements = 0;
+        Vector vector = new Vector(array);
+        int[] expected = {};
+        assertArrayEquals(expected, vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArray_getDigitsAscendingSequence() {
+        Vector vector = new Vector();
+        int minNumberElements = 0;
+        assertThrows(EmptyArrayException.class, () -> vector.getDigitsAscendingSequence(minNumberElements));
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArray_getPalindromes() {
+        Vector vector = new Vector();
+        assertThrows(EmptyArrayException.class, vector::getPalindromes);
+    }
+
+    @Test
+    public void shouldReturnCorrectPalindromes() {
+        int[] array = {1, 22, 11, 5, 232};
+        Vector vector = new Vector(array);
+        int[] expected = {22, 11, 232};
+        assertArrayEquals(expected, vector.getPalindromes());
+    }
+
+    @Test
+    public void shouldReturnCorrectPalindromesWithThreeDigitNotPalindrome() {
+        int[] array = {1, 22, 11, 5, 2331};
+        Vector vector = new Vector(array);
+        int[] expected = {22, 11};
+        assertArrayEquals(expected, vector.getPalindromes());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArray_getNumbersWithSameDigits() {
+        Vector vector = new Vector();
+        assertThrows(EmptyArrayException.class, vector::getNumbersWithSameDigits);
+    }
+
+    @Test
+    public void shouldReturnCorrectElementsWithEqualDigits() {
+        int[] array = {1, 22, 23, 444, 454, 556};
+        Vector vector = new Vector(array);
+        int[] expected = {22, 444};
+        assertArrayEquals(expected, vector.getNumbersWithSameDigits());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArray_getNotAmstrongNumbers() {
+        Vector vector = new Vector();
+        assertThrows(EmptyArrayException.class, vector::getPalindromes);
+    }
+
+    @Test
+    public void shouldReturnCorrectNotAmstrongNumbers() {
+        int[] array = {373, 371};
+        Vector vector = new Vector(array);
+        int[] expected = {373};
+        assertArrayEquals(expected, vector.getNotAmstrongNumbers());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArray_equals() {
+        int[] argArray = {1, 2};
+        Vector vector = new Vector();
+        assertThrows(EmptyArrayException.class, () -> vector.equals(argArray));
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayEmptyArgArray_equals() {
+        int[] array = {1, 2};
+        Vector vector = new Vector(array);
+        assertThrows(EmptyArrayException.class, () -> vector.equals(new int[0]));
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayNullArgArray_equals() {
+        int[] array = {1, 2};
+        Vector vector = new Vector(array);
+        assertThrows(NullPointerException.class, () -> vector.equals(null));
+    }
+
+    @Test
+    public void shouldReturnTrueForArrayEqualsArgArray() {
+        int[] array = {1, 2};
+        int[] argArray = {1, 2};
+        Vector vector = new Vector(array);
+        assertTrue(vector.equals(argArray));
+    }
+
+    @Test
+    public void shouldReturnFalseForArrayEqualsArgArray() {
+        int[] array = {1, 2};
+        int[] argArray = {1};
+        Vector vector = new Vector(array);
+        assertFalse(vector.equals(argArray));
     }
 }

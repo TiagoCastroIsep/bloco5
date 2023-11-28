@@ -39,7 +39,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldThrowExceptionForRowNumberMoreThanRowLength_addToRow() {
+    public void shouldThrowExceptionForRowNumberMoreThanRowLength_addToRow() throws EmptyArrayException {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 2;
         int number = 3;
@@ -94,12 +94,12 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldThrowExceptionForColumnNumberLessThanColumnLength78688tgijk_removeAtRow() {
+    public void shouldThrowExceptionEmptyArray_removeAtRow() {
         int[][] array = {};
         int rowNumber = 0;
         int index = 0;
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
+        assertThrows(EmptyArrayException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
     }
 
     @Test
@@ -116,7 +116,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxAllElementsDifferent() throws EmptyArrayException {
+    public void shouldReturnMaxAllElementsDifferent() {
         int[][] array = {
                 {1, 2},
                 {3, 4}
@@ -127,7 +127,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxAllElementsDifferentInvertedRows() throws EmptyArrayException {
+    public void shouldReturnMaxAllElementsDifferentInvertedRows() {
         int[][] array = {
                 {1, 2},
                 {2, 1}
@@ -138,7 +138,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxSomeElementsRepeated() throws EmptyArrayException {
+    public void shouldReturnMaxSomeElementsRepeated() {
         int[][] array = {
                 {1, 1},
                 {0, 4}
@@ -149,7 +149,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxFirstElementIsMax() throws EmptyArrayException {
+    public void shouldReturnMaxFirstElementIsMax() {
         int[][] array = {
                 {4, 1},
                 {2, 3}
@@ -160,7 +160,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxAllElementsRepeated() throws EmptyArrayException {
+    public void shouldReturnMaxAllElementsRepeated() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -177,7 +177,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMinAllElementsDifferent() throws EmptyArrayException {
+    public void shouldReturnMinAllElementsDifferent() {
         int[][] array = {
                 {4, 2},
                 {3, 1}
@@ -188,7 +188,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMaxFirstElementIsMin() throws EmptyArrayException {
+    public void shouldReturnMaxFirstElementIsMin() {
         int[][] array = {
                 {1, 4},
                 {2, 3}
@@ -199,7 +199,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnMinAllElementsRepeated() throws EmptyArrayException {
+    public void shouldReturnMinAllElementsRepeated() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -222,7 +222,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldGetAverageOfBiDimensionalArray() throws EmptyArrayException {
+    public void shouldGetAverageOfBiDimensionalArray() {
         int[][] array = {
                 {1, 2},
                 {3, 4}
@@ -233,7 +233,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldGetAverageOfBiDimensionalArrayAllZeros() throws EmptyArrayException {
+    public void shouldGetAverageOfBiDimensionalArrayAllZeros() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -261,7 +261,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldGetEachRowSumOfBiDimensionalArrayAllElementsZero() throws EmptyArrayException {
+    public void shouldGetEachRowSumOfBiDimensionalArrayAllElementsZero() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -299,7 +299,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithColumnSumsVerticalArray_getEachColumnSum() throws EmptyArrayException {
+    public void shouldReturnArrayWithColumnSumsVerticalArray_getEachColumnSum() {
         int[][] array = {
                 {1, 2},
                 {1, 1},
@@ -311,7 +311,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnArrayWithColumnSumsAllElementsZero_getEachColumnSum() throws EmptyArrayException {
+    public void shouldReturnArrayWithColumnSumsAllElementsZero_getEachColumnSum() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -328,7 +328,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnIndexFromMaxSum_getIndexFromMaxSum() throws EmptyArrayException {
+    public void shouldReturnIndexFromMaxSum_getIndexFromMaxSum() {
         int[][] array = {
                 {1, 3},
                 {2, 4}
@@ -339,7 +339,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnIndexFromMaxSumAllZeros_getIndexFromMaxSum() throws EmptyArrayException {
+    public void shouldReturnIndexFromMaxSumAllZeros_getIndexFromMaxSum() {
         int[][] array = {
                 {0, 0},
                 {0, 0}
@@ -582,7 +582,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnInvertedValuesForEachMatrixRowOnlyOneElement() throws EmptyArrayException {
+    public void shouldReturnInvertedValuesForEachMatrixRowOnlyOneElement() {
         int[][] array = {
                 {0},
                 {0}

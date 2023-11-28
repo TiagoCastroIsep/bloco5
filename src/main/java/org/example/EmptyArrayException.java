@@ -1,6 +1,6 @@
 package org.example;
 
-public class EmptyArrayException extends Exception {
+public class EmptyArrayException extends NullPointerException {
     public EmptyArrayException() {
     }
 

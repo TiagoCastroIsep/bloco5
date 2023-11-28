@@ -9,7 +9,7 @@ public class BiDimensionalVector {
         biDimensionalVector = new int[0][0];
     }
 
-    public BiDimensionalVector(int[][] biDimensionalVector) {
+    public BiDimensionalVector(int[][] biDimensionalVector) throws EmptyArrayException {
         this.biDimensionalVector = biDimensionalVector;
     }
 
@@ -23,7 +23,8 @@ public class BiDimensionalVector {
         return biDimensionalVector;
     }
 
-    public int[][] removeAtRow(int rowNumber, int index) throws ArrayIndexOutOfBoundsException {
+    public int[][] removeAtRow(int rowNumber, int index) {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         Vector vector = new Vector((biDimensionalVector[rowNumber]));
         biDimensionalVector[rowNumber] = vector.removeAt(index);
         return biDimensionalVector;
@@ -33,7 +34,7 @@ public class BiDimensionalVector {
         return biDimensionalVector.length == 0;
     }
 
-    public int getMax() throws EmptyArrayException {
+    public int getMax() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         int max = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
@@ -43,7 +44,7 @@ public class BiDimensionalVector {
         return max;
     }
 
-    public int getMin() throws EmptyArrayException {
+    public int getMin() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         int min = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
@@ -53,7 +54,7 @@ public class BiDimensionalVector {
         return min;
     }
 
-    public double getAverage() throws EmptyArrayException {
+    public double getAverage() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         List<Double> rowAverage = new ArrayList<>();
         for (int[] row : biDimensionalVector) {
@@ -63,7 +64,7 @@ public class BiDimensionalVector {
         return rowAverage.stream().reduce(0.0, (el, acc) -> el + acc) / rowAverage.size();
     }
 
-    public int[] getEachRowSum() throws EmptyArrayException {
+    public int[] getEachRowSum() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         List<Integer> rowSum = new ArrayList<>();
         for (int[] row : biDimensionalVector) {
@@ -72,7 +73,7 @@ public class BiDimensionalVector {
         return rowSum.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public int[] getEachColumnSum() throws EmptyArrayException {
+    public int[] getEachColumnSum() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         if (!columnSumIsPossible()) throw new IllegalArgumentException();
 
@@ -95,7 +96,7 @@ public class BiDimensionalVector {
         return rowLength.size() == 1;
     }
 
-    public int getRowIndexFromMaxSum() throws EmptyArrayException {
+    public int getRowIndexFromMaxSum() {
         int[] rowSum = getEachRowSum();
         Vector vector = new Vector(rowSum);
 
@@ -174,7 +175,7 @@ public class BiDimensionalVector {
     //TODO: p)
     //TODO: q)
 
-    public int[][] invertValuesEachRow() throws EmptyArrayException {
+    public int[][] invertValuesEachRow() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 

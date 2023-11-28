@@ -2,8 +2,7 @@ package org.example;
 
 import java.lang.reflect.MalformedParametersException;
 import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class Vector {
     private final int[] vector;
@@ -75,14 +74,14 @@ public class Vector {
         return minVal;
     }
 
-    protected double getAverage(int[] array) throws EmptyArrayException {
+    protected double getAverage(int[] array) {
         if (vector.length == 0) throw new EmptyArrayException();
         int sum = 0;
         for (int value : array) sum += value;
         return (double) sum / array.length;
     }
 
-    protected int[] getEvenNumbers() throws EmptyArrayException {
+    protected int[] getEvenNumbers() {
         if (vector.length == 0) throw new EmptyArrayException("Array can't be empty");
         int arrayLength = getEvenNumbersLength();
         int[] evenNumbersArray = new int[arrayLength];
@@ -113,7 +112,7 @@ public class Vector {
         return count;
     }
 
-    public double getAverageEvenNumbers() throws EmptyArrayException {
+    public double getAverageEvenNumbers() {
         return getAverage(getEvenNumbers());
     }
 
@@ -141,12 +140,12 @@ public class Vector {
         return count;
     }
 
-    public double getAverageOddNumbers() throws EmptyArrayException {
+    public double getAverageOddNumbers() {
         int[] oddNumbers = getOddNumbers();
         return oddNumbers.length > 0 ? getAverage(oddNumbers) : 0.0;
     }
 
-    protected int[] getMultiplesOfNumber(int number) throws EmptyArrayException {
+    protected int[] getMultiplesOfNumber(int number) {
         if (vector.length == 0) throw new EmptyArrayException("Cannot divide by zero");
         if (number == 0) return vector;
 
@@ -166,7 +165,7 @@ public class Vector {
         return count;
     }
 
-    public double getAverageOfMultiples(int number) throws EmptyArrayException {
+    public double getAverageOfMultiples(int number) {
         return getAverage(getMultiplesOfNumber(number));
     }
 
@@ -255,16 +254,19 @@ public class Vector {
     /** START: t) **/
     protected int[] getDigits(int number) {
         if (number == 0) return new int[] {0};
-        List<Integer> result = new ArrayList<>();
+        int[] digits = new int[getDigitsCount(number)];
+        int index = digits.length - 1;
         while (number != 0) {
-            result.add(number % 10);
+            digits[index] = number % 10;
             number /= 10;
+            index--;
         }
-        return result.stream().mapToInt(Integer::intValue).toArray();
+
+        return digits;
     }
 
     /** START: u) **/
-    protected int[] getEvenDigitsInVector(int[] array) throws EmptyArrayException {
+    protected int[] getEvenDigitsInVector(int[] array) {
         if (array.length == 0) throw new EmptyArrayException("Array can't be empty");
         List<Integer> result = new ArrayList<>();
         for (int number : array) {
@@ -281,11 +283,11 @@ public class Vector {
         return count;
     }
 
-    private double getAverageEvenDigits(int[] array, int totalCount) throws EmptyArrayException {
+    private double getAverageEvenDigits(int[] array, int totalCount) {
         return (double) getEvenDigitsInVector(array).length / totalCount;
     }
 
-    public int[] getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits() throws EmptyArrayException {
+    public int[] getNumberWithEvenDigitsBiggerThanAverageOfEvenDigits() {
         double averageEvenDigitsInVector = getAverageEvenDigits(vector, getDigitsCountFromVector());
         List<Integer> result = new ArrayList<>();
         for (int number : vector) {
@@ -299,7 +301,7 @@ public class Vector {
     }
     /** END: t) **/
 
-    public int[] reversedOrder() throws EmptyArrayException {
+    public int[] reversedOrder() {
         if (vector.length == 0) throw new EmptyArrayException();
         int[] reversedVector = new int[vector.length];
         for (int i = 0, j = vector.length - 1; i < vector.length; i++, j--) {
@@ -308,10 +310,93 @@ public class Vector {
         return reversedVector;
     }
 
-    //TODO: v)
-    //TODO: w)
-    //TODO: x)
-    //TODO: y)
-    //TODO: z)
-    //TODO: aa)
+    public int[] getDigitsAscendingSequence(int minNumberElements) {
+        if (vector.length == 0) throw new EmptyArrayException();
+        List<Integer> ascDigitsList = new ArrayList<>();
+        for (int number : vector) {
+            int[] digits = getDigits(number);
+            if (isAscOrder(digits, minNumberElements)) ascDigitsList.add(number);
+        }
+        return ascDigitsList.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private boolean isAscOrder(int[] digits, int minNumberElements) {
+//        if (vector.length == 0) throw new EmptyArrayException(); // private so not necessary
+        if (digits.length == 1) return true;
+        if (digits.length < minNumberElements) return false;
+
+        int previousDigit = digits[0];
+        for (int i = 1; i < digits.length; i++) {
+            if (previousDigit == digits[i]) return false;
+            if (previousDigit > digits[i]) return false;
+        }
+        return true;
+    }
+
+    public int[] getPalindromes() {
+        if (vector.length == 0) throw new EmptyArrayException();
+        List<Integer> palindromes = new ArrayList<>();
+        for (int number : vector) {
+            int[] digits = getDigits(number);
+            if (isPalindrome(digits)) palindromes.add(number);
+        }
+        return palindromes.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private boolean isPalindrome(int[] digits) {
+        if (digits.length == 1) return false;
+        for (int i = 0; i < digits.length; i++) {
+            if (digits[i] != digits[digits.length - 1 - i]) return false;
+        }
+        return true;
+    }
+
+    public int[] getNumbersWithSameDigits() {
+        if (vector.length == 0) throw new EmptyArrayException();
+        List<Integer> sameDigits = new ArrayList<>();
+        for (int number : vector) {
+            int[] digits = getDigits(number);
+            if (isSameDigits(digits)) sameDigits.add(number);
+        }
+        return sameDigits.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private boolean isSameDigits(int[] digits) {
+        if (digits.length == 1) return false;
+        int prevDigit = digits[0];
+        for (int digit : digits) {
+            if (digit != prevDigit) return false;
+        }
+        return true;
+    }
+
+    public int[] getNotAmstrongNumbers() {
+        if (vector.length == 0) throw new EmptyArrayException();
+
+        List<Integer> notAmstrong = new ArrayList<>();
+        for (int number : vector) {
+            int[] digits = getDigits(number);
+            if (!isAmstrong(digits, number)) notAmstrong.add(number);
+        }
+
+        return notAmstrong.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    private boolean isAmstrong(int[] digits, int number) {
+        int sum = 0;
+        for (int l : digits) {
+            sum += (int) Math.pow(l, 3);
+        }
+
+        return sum == number;
+    }
+
+    public boolean equals(int[] array) throws NullPointerException {
+        if (vector.length == 0) throw new EmptyArrayException();
+        if (array.length == 0) throw new EmptyArrayException();
+        List<Integer> argArray = Arrays.stream(array).boxed().collect(Collectors.toList());
+        List<Integer> objArray = Arrays.stream(vector).boxed().collect(Collectors.toList());
+
+        return objArray.equals(argArray);
+    }
 }
