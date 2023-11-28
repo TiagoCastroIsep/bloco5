@@ -277,7 +277,7 @@ public class Vector {
     }
     /** END: u) **/
 
-    private int getDigitsCountFromVector() {
+    public int getDigitsCountFromVector() {
         int count = 0;
         for (int number : vector) count += getDigits(number).length;
         return count;
@@ -327,8 +327,7 @@ public class Vector {
 
         int previousDigit = digits[0];
         for (int i = 1; i < digits.length; i++) {
-            if (previousDigit == digits[i]) return false;
-            if (previousDigit > digits[i]) return false;
+            if (previousDigit >= digits[i]) return false;
         }
         return true;
     }

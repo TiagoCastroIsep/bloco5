@@ -552,6 +552,61 @@ class BiDimensionalVectorTest {
     }
 
     @Test
+    public void shouldThrowExceptionForEmptyArray_getNumbersWithGreaterDigitsThanAverage() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        boolean gettingJustEven = false;
+        assertThrows(EmptyArrayException.class, () -> biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+    }
+
+    @Test
+    public void shouldReturnDigitsGreaterThanAverage() {
+        int[][] array = {
+                {1, 2},
+                {1, 10}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        boolean gettingJustEven = false;
+        int[] expected = {10};
+        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+    }
+
+    @Test
+    public void shouldReturnEmptyArrayForNoneGreaterThanAverage() {
+        int[][] array = {
+                {1, 2},
+                {1, 1}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        boolean gettingJustEven = false;
+        int[] expected = {};
+        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+    }
+
+    @Test
+    public void shouldReturnEvenDigitsGreaterThanAverage() {
+        int[][] array = {
+                {2, 2},
+                {2, 120}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        boolean gettingJustEven = true;
+        int[] expected = {120};
+        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+    }
+
+    @Test
+    public void shouldReturnEmptyArrayForNoneEvenGreaterThanAverage() {
+        int[][] array = {
+                {1, 1},
+                {1, 1}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        boolean gettingJustEven = true;
+        int[] expected = {};
+        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+    }
+
+    @Test
     public void shouldThrowExceptionForEmptyArrayOnInvertedValuesForEachMatrixRow() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
         assertThrows(EmptyArrayException.class, biDimensionalVector::invertValuesEachRow);
@@ -568,7 +623,7 @@ class BiDimensionalVectorTest {
     }
 
     @Test
-    public void shouldReturnInvertedValuesForEachMatrixRow() throws EmptyArrayException {
+    public void shouldReturnInvertedValuesForEachMatrixRow() {
         int[][] array = {
                 {1, 2, 3},
                 {4, 5, 6}
@@ -593,5 +648,134 @@ class BiDimensionalVectorTest {
                 {0}
         };
         assertArrayEquals(expected, biDimensionalVector.invertValuesEachRow());
+    }
+
+    @Test
+    public void shouldReturnInvertedValuesForEachMatrixColumn() {
+        int[][] array = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {1, 4},
+                {2, 5},
+                {3, 6}
+        };
+        assertArrayEquals(expected, biDimensionalVector.invertMatrixByColumn());
+    }
+
+    @Test
+    public void shouldReturnInvertedValuesForEachMatrixColumnSquareMatrix() {
+        int[][] array = {
+                {1, 2},
+                {3, 4},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {1, 3},
+                {2, 4},
+        };
+        assertArrayEquals(expected, biDimensionalVector.invertMatrixByColumn());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayOnInvertedValuesForEachMatrixColumn() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertThrows(EmptyArrayException.class, biDimensionalVector::invertColumn);
+    }
+
+    @Test
+    public void shouldThrowExceptionForNotRegularArrayOnInvertedValuesForEachMatrixColumn() {
+        int[][] array = {
+                {1, 1},
+                {2, 2, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertThrows(IllegalArgumentException.class, biDimensionalVector::invertColumn);
+    }
+
+    @Test
+    public void shouldReturnInvertedValuesForEachColumn() {
+        int[][] array = {
+                {1, 2, 3},
+                {4, 5, 6}
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {4, 5, 6},
+                {1, 2, 3}
+        };
+        assertArrayEquals(expected, biDimensionalVector.invertColumn());
+    }
+
+    @Test
+    public void shouldThrowExceptionForEmptyArrayOnRotated90() {
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        assertThrows(EmptyArrayException.class, biDimensionalVector::rotate90);
+    }
+
+    @Test
+    public void shouldThrowExceptionForNotRegularArrayOnRotated90() {
+        int[][] array = {
+                {1, 1},
+                {2, 2, 2},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        assertThrows(IllegalArgumentException.class, biDimensionalVector::rotate90);
+    }
+
+    @Test
+    public void shouldReturnRotated90() {
+        int[][] array = {
+                {1, 2, 3, 4},
+                {4, 5, 6, 7},
+                {8, 9, 0, 1},
+                {2, 3, 4, 5},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {4, 7, 1, 5},
+                {3, 6, 0, 4},
+                {2, 5, 9, 3},
+                {1, 4, 8, 2},
+        };
+        assertArrayEquals(expected, biDimensionalVector.rotate90());
+    }
+
+    @Test
+    public void shouldReturnRotated180() {
+        int[][] array = {
+                {1, 2, 3, 4},
+                {4, 5, 6, 7},
+                {8, 9, 0, 1},
+                {2, 3, 4, 5},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {5, 4, 3, 2},
+                {1, 0, 9, 8},
+                {7, 6, 5, 4},
+                {4, 3, 2, 1},
+        };
+        assertArrayEquals(expected, biDimensionalVector.rotate180(array));
+    }
+
+    @Test
+    public void shouldReturnRotatedMinus90() {
+        int[][] array = {
+                {1, 2, 3, 4},
+                {4, 5, 6, 7},
+                {8, 9, 0, 1},
+                {2, 3, 4, 5},
+        };
+        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        int[][] expected = {
+                {2, 8, 4, 1},
+                {3, 9, 5, 2},
+                {4, 0, 6, 3},
+                {5, 1, 7, 4},
+        };
+        assertArrayEquals(expected, biDimensionalVector.rotateMinus90());
     }
 }

@@ -172,8 +172,52 @@ public class BiDimensionalVector {
         }
         return secondDiagonal;
     }
-    //TODO: p)
-    //TODO: q)
+
+    /** START: p) **/
+    private int getTotalDigits(boolean gettingJustEven) {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+
+        int count = 0;
+        for (int[] row : biDimensionalVector) {
+            Vector vector = new Vector(row);
+            if (!gettingJustEven) count += vector.getDigitsCountFromVector();
+            else count += vector.getEvenDigitsInVector(row).length;
+        }
+        return count;
+    }
+
+    private int getElementsTotal() {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        return biDimensionalVector.length * biDimensionalVector[0].length;
+    }
+
+    private double getDigitsAverage(boolean gettingJustEven) {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        return (double) getTotalDigits(gettingJustEven) / getElementsTotal();
+    }
+
+    public int[] getNumbersWithGreaterDigitsThanAverage(boolean gettingJustEven) {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        List<Integer> greaterDigits = new ArrayList<>();
+        double average = getDigitsAverage(gettingJustEven);
+        for (int[] row : biDimensionalVector) {
+            Vector vector = new Vector(row);
+            for (int number : row) {
+                if (!gettingJustEven) {
+                    if (vector.getDigits(number).length > average) greaterDigits.add(number);
+                } else {
+                    int[] digits = vector.getDigits(number);
+                    int count = 0;
+                    for (int digit : digits) {
+                        if (digit % 2 == 0) count++;
+                        if (count > average) greaterDigits.add(number);
+                    }
+                }
+            }
+        }
+        return greaterDigits.stream().mapToInt(Integer::intValue).toArray();
+    }
+    /** END: p) & q) **/
 
     public int[][] invertValuesEachRow() {
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
@@ -190,8 +234,69 @@ public class BiDimensionalVector {
         return reversedMatrix;
     }
 
-    //TODO: s)
-    //TODO: t)
-    //TODO: u)
-    //TODO: v)
+    // done by mistake, not requested but keeping the code
+    public int[][] invertMatrixByColumn() {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
+
+        int[][] reversedMatrix = new int[biDimensionalVector[0].length][biDimensionalVector.length];
+
+        for (int index = 0; index < biDimensionalVector[0].length; index++) {
+            int[] tempRow = new int[biDimensionalVector.length];
+            for (int row = 0; row < biDimensionalVector.length; row++) {
+                tempRow[row] = biDimensionalVector[row][index];
+            }
+            reversedMatrix[index] = tempRow;
+        }
+
+        return reversedMatrix;
+    }
+
+    public int[][] invertColumn() {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
+
+        int[][] reversedMatrix = new int[biDimensionalVector.length][biDimensionalVector[0].length];
+
+        for (int index = 0; index < biDimensionalVector[0].length; index++) {
+            for (int row = 0; row < biDimensionalVector.length; row++) {
+                reversedMatrix[row][index] = biDimensionalVector[biDimensionalVector.length - 1 - row][index];
+            }
+        }
+
+        return reversedMatrix;
+    }
+
+    public int[][] rotate90() {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
+
+        // TODO: limit to square
+        int[][] rotated = new int[biDimensionalVector.length][biDimensionalVector.length];
+
+        for (int i = 0; i < biDimensionalVector.length; i++) {
+            for (int row = 0; row < biDimensionalVector.length; row++) {
+                rotated[row][i] = biDimensionalVector[i][biDimensionalVector.length - 1 - row];
+            }
+        }
+        return rotated;
+    }
+
+    public int[][] rotate180(int[][] array) {
+        // TODO: limit to square
+        int[][] rotated = new int[array.length][array.length];
+
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                rotated[i][j] = array[biDimensionalVector.length - 1 - i][array.length - 1 - j];
+            }
+        }
+
+        return rotated;
+    }
+
+    public int[][] rotateMinus90() {
+        int[][] rotate90 = rotate90();
+        return rotate180(rotate90);
+    }
 }
