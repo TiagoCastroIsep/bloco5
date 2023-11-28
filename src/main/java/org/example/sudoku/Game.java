@@ -15,10 +15,9 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        Set<Integer> rowNumbers = new HashSet<>();
-
         int rowNr = 0;
-        while (rowNr != gameMatrix.getGameMatrixSize() - 1) {
+        while (rowNr != gameMatrix.getGameMatrixSize()) {
+            Set<Integer> rowNumbers = new HashSet<>();
             boolean isComplete = runRowsLookup(rowNumbers, rowNr);
             if (!isComplete) return false;
             rowNr++;
@@ -31,8 +30,9 @@ public class Game {
         for (int i = 0; i < gameMatrix.getGameMatrixSize(); i++) {
             if (gameMatrix.getCardMatrix()[rowNr][i] != 0) {
                 rowNumbers.add(gameMatrix.getCardMatrix()[rowNr][i]);
-            } else return false;
+            }
         }
-        return true;
+
+        return rowNumbers.size() == gameMatrix.getGameMatrixSize();
     }
 }
