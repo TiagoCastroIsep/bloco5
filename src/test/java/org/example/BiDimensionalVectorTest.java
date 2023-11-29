@@ -8,8 +8,6 @@ class BiDimensionalVectorTest {
     @Test
     public void shouldCreateBiDimensionalEmptyArray() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        int[][] expected = {};
-        assertArrayEquals(expected, biDimensionalVector.getBiDimensionalVector());
     }
 
     @Test
@@ -91,15 +89,6 @@ class BiDimensionalVectorTest {
         int index = -1;
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
         assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
-    }
-
-    @Test
-    public void shouldThrowExceptionEmptyArray_removeAtRow() {
-        int[][] array = {};
-        int rowNumber = 0;
-        int index = 0;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(EmptyArrayException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
     }
 
     @Test

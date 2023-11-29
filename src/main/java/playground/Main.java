@@ -1,19 +1,27 @@
 package playground;
 
 import org.example.BiDimensionalVector;
+import org.example.Vector;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        int[] array = {1, 2, 3};
+        int[] added = new Vector(array).add(4);
+        System.out.println(Arrays.toString(array));
+        System.out.println(Arrays.toString(added));
 
-        System.out.println(-4 % 2);
         int[][] biVector = {
                 {1, 2, 3},
-                {1, 2},
+                {1, 2, 4},
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(biVector);
-        System.out.println(Arrays.deepToString(biDimensionalVector.addToRow(1, 4)));
+
+        biDimensionalVector.addToRow(0, 4);
+        System.out.println(Arrays.deepToString(biVector));
+        System.out.println(Arrays.deepToString(biDimensionalVector.getBiDimensionalVector()));
+        System.out.println(Arrays.deepToString(biDimensionalVector.addToRow(0, 4)));
     }
 
     // sorting algorithms

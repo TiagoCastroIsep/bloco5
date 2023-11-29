@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class BiDimensionalVector {
     private final int[][] biDimensionalVector;
@@ -11,26 +12,46 @@ public class BiDimensionalVector {
 
     public BiDimensionalVector(int[][] biDimensionalVector) {
 //        If I add this line, I must remove all the assertThrows calls since it's at the constructor that the Exception is thrown
-//        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
-        this.biDimensionalVector = biDimensionalVector;
+        this.biDimensionalVector = getBiDimensionalVectorCopy(biDimensionalVector);
+    }
+
+    private int[][] getBiDimensionalVectorCopy(int[][] biDimensionalVector) {
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        List<List<Integer>> biDimenList = new ArrayList<>();
+        for (int[] row : biDimensionalVector) {
+            biDimenList.add(Arrays.stream(row).boxed().collect(Collectors.toList()));
+        }
+        int[][] biDimenCopy = new int[biDimensionalVector.length][biDimensionalVector[0].length];
+        int index = 0;
+        for (List<Integer> row : biDimenList) {
+            biDimenCopy[index] = row.stream().mapToInt(Integer::intValue).toArray();
+            index++;
+        }
+        return biDimenCopy;
     }
 
     public int[][] getBiDimensionalVector() {
-        return biDimensionalVector;
+        return getBiDimensionalVectorCopy(biDimensionalVector);
     }
 
     public int[][] addToRow(int rowNumber, int number) throws ArrayIndexOutOfBoundsException {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         Vector vector = new Vector(biDimensionalVector[rowNumber]);
-        biDimensionalVector[rowNumber] = vector.add(number);
-        return biDimensionalVector;
+        int[][] biDimenVectorCopy = new int[biDimensionalVector.length][biDimensionalVector[0].length];
+        int index = 0;
+        for (int[] row : biDimensionalVector) {
+            biDimenVectorCopy[index] = row;
+            index++;
+        }
+        biDimenVectorCopy[rowNumber] = vector.add(number);
+        return biDimenVectorCopy;
     }
 
     public int[][] removeAtRow(int rowNumber, int index) {
-        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         Vector vector = new Vector((biDimensionalVector[rowNumber]));
-        biDimensionalVector[rowNumber] = vector.removeAt(index);
-        return biDimensionalVector;
+        int[][] biDimenCopy = getBiDimensionalVectorCopy(biDimensionalVector);
+        biDimenCopy[rowNumber] = vector.removeAt(index);
+        return biDimenCopy;
     }
 
     public boolean isEmpty(int[][] array) {
@@ -78,7 +99,7 @@ public class BiDimensionalVector {
 
     public int[] getEachColumnSum() {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
-        if (!columnSumIsPossible()) throw new IllegalArgumentException();
+        if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 
         List<Integer> columnSum = new ArrayList<>();
         for (int column = 0; column < biDimensionalVector[0].length; column++) {
@@ -89,14 +110,6 @@ public class BiDimensionalVector {
             columnSum.add(sum);
         }
         return columnSum.stream().mapToInt(Integer::intValue).toArray();
-    }
-
-    private boolean columnSumIsPossible() {
-        Set<Integer> rowLength = new HashSet<>();
-        for (int[] row : biDimensionalVector) {
-            rowLength.add(row.length);
-        }
-        return rowLength.size() == 1;
     }
 
     public int getRowIndexFromMaxSum() {

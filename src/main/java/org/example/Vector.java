@@ -1,6 +1,6 @@
 package org.example;
 
-import java.lang.reflect.MalformedParametersException;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -12,11 +12,11 @@ public class Vector {
     }
 
     public Vector(int[] vector) {
-        this.vector = vector;
+        this.vector = Arrays.copyOf(vector, vector.length);
     }
 
     public int[] getVector() {
-        return vector;
+        return Arrays.copyOf(vector, vector.length);
     }
 
     public int getValueAt(int index) throws IndexOutOfBoundsException {
