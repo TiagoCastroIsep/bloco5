@@ -9,7 +9,9 @@ public class BiDimensionalVector {
         biDimensionalVector = new int[0][0];
     }
 
-    public BiDimensionalVector(int[][] biDimensionalVector) throws EmptyArrayException {
+    public BiDimensionalVector(int[][] biDimensionalVector) {
+//        If I add this line, I must remove all the assertThrows calls since it's at the constructor that the Exception is thrown
+//        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         this.biDimensionalVector = biDimensionalVector;
     }
 
@@ -18,24 +20,25 @@ public class BiDimensionalVector {
     }
 
     public int[][] addToRow(int rowNumber, int number) throws ArrayIndexOutOfBoundsException {
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         Vector vector = new Vector(biDimensionalVector[rowNumber]);
         biDimensionalVector[rowNumber] = vector.add(number);
         return biDimensionalVector;
     }
 
     public int[][] removeAtRow(int rowNumber, int index) {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         Vector vector = new Vector((biDimensionalVector[rowNumber]));
         biDimensionalVector[rowNumber] = vector.removeAt(index);
         return biDimensionalVector;
     }
 
-    public boolean isEmpty() {
-        return biDimensionalVector.length == 0;
+    public boolean isEmpty(int[][] array) {
+        return array.length == 0;
     }
 
     public int getMax() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         int max = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
             Vector vector = new Vector(row);
@@ -45,7 +48,7 @@ public class BiDimensionalVector {
     }
 
     public int getMin() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         int min = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
             Vector vector = new Vector(row);
@@ -55,7 +58,7 @@ public class BiDimensionalVector {
     }
 
     public double getAverage() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         List<Double> rowAverage = new ArrayList<>();
         for (int[] row : biDimensionalVector) {
             Vector vector = new Vector(row);
@@ -65,7 +68,7 @@ public class BiDimensionalVector {
     }
 
     public int[] getEachRowSum() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         List<Integer> rowSum = new ArrayList<>();
         for (int[] row : biDimensionalVector) {
             rowSum.add(Arrays.stream(row).sum());
@@ -74,7 +77,7 @@ public class BiDimensionalVector {
     }
 
     public int[] getEachColumnSum() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         if (!columnSumIsPossible()) throw new IllegalArgumentException();
 
         List<Integer> columnSum = new ArrayList<>();
@@ -175,7 +178,7 @@ public class BiDimensionalVector {
 
     /** START: p) **/
     private int getTotalDigits(boolean gettingJustEven) {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
 
         int count = 0;
         for (int[] row : biDimensionalVector) {
@@ -187,19 +190,21 @@ public class BiDimensionalVector {
     }
 
     private int getElementsTotal() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         return biDimensionalVector.length * biDimensionalVector[0].length;
     }
 
     private double getDigitsAverage(boolean gettingJustEven) {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         return (double) getTotalDigits(gettingJustEven) / getElementsTotal();
     }
 
     public int[] getNumbersWithGreaterDigitsThanAverage(boolean gettingJustEven) {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
+
         List<Integer> greaterDigits = new ArrayList<>();
         double average = getDigitsAverage(gettingJustEven);
+
         for (int[] row : biDimensionalVector) {
             Vector vector = new Vector(row);
             for (int number : row) {
@@ -220,7 +225,7 @@ public class BiDimensionalVector {
     /** END: p) & q) **/
 
     public int[][] invertValuesEachRow() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 
         int[][] reversedMatrix = new int[biDimensionalVector.length][biDimensionalVector[0].length];
@@ -236,7 +241,7 @@ public class BiDimensionalVector {
 
     // done by mistake, not requested but keeping the code
     public int[][] invertMatrixByColumn() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 
         int[][] reversedMatrix = new int[biDimensionalVector[0].length][biDimensionalVector.length];
@@ -253,7 +258,7 @@ public class BiDimensionalVector {
     }
 
     public int[][] invertColumn() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 
         int[][] reversedMatrix = new int[biDimensionalVector.length][biDimensionalVector[0].length];
@@ -268,7 +273,7 @@ public class BiDimensionalVector {
     }
 
     public int[][] rotate90() {
-        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         if (!checkIfMatrixIsRegular()) throw new IllegalArgumentException();
 
         // TODO: limit to square
@@ -283,6 +288,7 @@ public class BiDimensionalVector {
     }
 
     public int[][] rotate180(int[][] array) {
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         // TODO: limit to square
         int[][] rotated = new int[array.length][array.length];
 
@@ -296,6 +302,8 @@ public class BiDimensionalVector {
     }
 
     public int[][] rotateMinus90() {
+        if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
+
         int[][] rotate90 = rotate90();
         return rotate180(rotate90);
     }

@@ -8,7 +8,7 @@ public class Vector {
     private final int[] vector;
 
     public Vector() {
-        this(new int[0]);
+        this.vector = new int[0];
     }
 
     public Vector(int[] vector) {
@@ -19,16 +19,12 @@ public class Vector {
         return vector;
     }
 
-    public int[] getVectorFromEmptyConstructor() {
-        return vector;
-    }
-
     public int getValueAt(int index) throws IndexOutOfBoundsException {
         return vector[index];
     }
 
     public int indexOf(int number) {
-        if (vector.length == 0) throw new NullPointerException();
+        if (isEmpty()) throw new EmptyArrayException();
         int index = 0;
         for (int currentValue : vector) {
             if (number == currentValue) break;
@@ -48,6 +44,7 @@ public class Vector {
     }
 
     public int[] removeAt(int index) throws IndexOutOfBoundsException {
+        if (isEmpty()) throw new EmptyArrayException();
         int[] shortenedVector = new int[vector.length - 1];
         for (int i = 0, currIndex = 0; i < vector.length; i++) {
             if (vector[i] != vector[index]) {
@@ -63,26 +60,27 @@ public class Vector {
     }
 
     public int getMax() {
+        if (isEmpty()) throw new EmptyArrayException();
         int maxVal = vector[0];
         for (int currNumber : vector) maxVal = Math.max(currNumber, maxVal);
         return maxVal;
     }
 
     public int getMin() {
+        if (isEmpty()) throw new EmptyArrayException();
         int minVal = vector[0];
         for (int currNumber : vector) minVal = Math.min(currNumber, minVal);
         return minVal;
     }
 
     protected double getAverage(int[] array) {
-        if (vector.length == 0) throw new EmptyArrayException();
+        if (array.length == 0) throw new EmptyArrayException();
         int sum = 0;
         for (int value : array) sum += value;
         return (double) sum / array.length;
     }
 
     protected int[] getEvenNumbers() {
-        if (vector.length == 0) throw new EmptyArrayException("Array can't be empty");
         int arrayLength = getEvenNumbersLength();
         int[] evenNumbersArray = new int[arrayLength];
         for (int i = 0, currIndex = 0; i < vector.length; i++) {
@@ -101,6 +99,7 @@ public class Vector {
     }
 
     private int getEvenNumbersLength() {
+        if (isEmpty()) throw new EmptyArrayException();
         int count = 0;
         for (int number : vector) {
             if (number == 0) {
@@ -117,7 +116,8 @@ public class Vector {
     }
 
     protected int[] getOddNumbers() {
-        if (vector.length == 0) throw new MalformedParametersException("Array can't be empty");
+        if (isEmpty()) throw new EmptyArrayException();
+
         int arrayLength = getOddNumbersLength();
         int[] oddsArray = new int[arrayLength];
         for (int i = 0, currIndex = 0; i < vector.length; i++) {
@@ -132,6 +132,7 @@ public class Vector {
     }
 
     private int getOddNumbersLength() {
+        if (isEmpty()) throw new EmptyArrayException();
         int count = 0;
         for (int number : vector) {
             if (number == 0) continue;
@@ -146,7 +147,7 @@ public class Vector {
     }
 
     protected int[] getMultiplesOfNumber(int number) {
-        if (vector.length == 0) throw new EmptyArrayException("Cannot divide by zero");
+        if (isEmpty()) throw new EmptyArrayException("Cannot divide by zero.");
         if (number == 0) return vector;
 
         int[] multiples = new int[getMultiplesLength(number)];
@@ -170,8 +171,7 @@ public class Vector {
     }
 
     public int[] sorted(SortingType sortingType) {
-        if (vector.length == 0) throw new MalformedParametersException("Array can't be empty");
-
+        if (isEmpty()) throw new EmptyArrayException();
         int[] sortedArray = Arrays.copyOf(vector, vector.length);
 
         if (sortingType == SortingType.ASC) {
@@ -208,6 +208,7 @@ public class Vector {
     }
 
     private int countDuplicates() {
+        if (isEmpty()) throw new EmptyArrayException();
         int count = 0;
         for (int i = 0; i < vector.length; i++) {
             for (int j = 1; j < vector.length; j++) {
@@ -321,7 +322,6 @@ public class Vector {
     }
 
     private boolean isAscOrder(int[] digits, int minNumberElements) {
-//        if (vector.length == 0) throw new EmptyArrayException(); // private so not necessary
         if (digits.length == 1) return true;
         if (digits.length < minNumberElements) return false;
 
@@ -333,7 +333,7 @@ public class Vector {
     }
 
     public int[] getPalindromes() {
-        if (vector.length == 0) throw new EmptyArrayException();
+        if (isEmpty()) throw new EmptyArrayException();
         List<Integer> palindromes = new ArrayList<>();
         for (int number : vector) {
             int[] digits = getDigits(number);
@@ -370,7 +370,7 @@ public class Vector {
     }
 
     public int[] getNotAmstrongNumbers() {
-        if (vector.length == 0) throw new EmptyArrayException();
+        if (isEmpty()) throw new EmptyArrayException();
 
         List<Integer> notAmstrong = new ArrayList<>();
         for (int number : vector) {
@@ -391,7 +391,7 @@ public class Vector {
     }
 
     public boolean equals(int[] array) throws NullPointerException {
-        if (vector.length == 0) throw new EmptyArrayException();
+        if (isEmpty()) throw new EmptyArrayException();
         if (array.length == 0) throw new EmptyArrayException();
         List<Integer> argArray = Arrays.stream(array).boxed().collect(Collectors.toList());
         List<Integer> objArray = Arrays.stream(vector).boxed().collect(Collectors.toList());

@@ -106,13 +106,13 @@ class BiDimensionalVectorTest {
     public void shouldReturnFalseForNotEmptyMatrix() {
         int[][] array = {{1, 2}, {1, 2}};
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertFalse(biDimensionalVector.isEmpty());
+        assertFalse(biDimensionalVector.isEmpty(array));
     }
 
     @Test
     public void shouldReturnTrueForEmptyMatrix() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertTrue(biDimensionalVector.isEmpty());
+        assertTrue(biDimensionalVector.isEmpty(new int[0][]));
     }
 
     @Test

@@ -22,19 +22,6 @@ class VectorTest {
     }
 
     @Test
-    public void shouldReturnEmptyArray() {
-        Vector vector = new Vector();
-        assertArrayEquals(new int[0], vector.getVectorFromEmptyConstructor());
-    }
-
-    @Test
-    public void shouldReturnProvidedArray() {
-        int[] array = {1, 2, 3};
-        Vector vector = new Vector(array);
-        assertArrayEquals(array, vector.getVectorFromEmptyConstructor());
-    }
-
-    @Test
     public void shouldReturnValueFromArrayAtIndexOf() {
         int[] array = {1, 2, 3};
         Vector vector = new Vector(array);
@@ -374,7 +361,7 @@ class VectorTest {
     @Test
     public void shouldReturnExceptionFromEmptyVector_getAverageOddNumbers() {
         Vector vector = new Vector();
-        assertThrows(MalformedParametersException.class, vector::getAverageOddNumbers);
+        assertThrows(EmptyArrayException.class, vector::getAverageOddNumbers);
     }
 
     @Test
@@ -495,7 +482,7 @@ class VectorTest {
     @Test
     public void shouldReturnExceptionForEmptyArray() {
         Vector vector = new Vector();
-        assertThrows(MalformedParametersException.class, () -> vector.sorted(SortingType.ASC));
+        assertThrows(EmptyArrayException.class, () -> vector.sorted(SortingType.ASC));
     }
 
     @Test
@@ -654,7 +641,7 @@ class VectorTest {
     @Test
     public void shouldReturnArrayWithOneElementFor1DigitNumber() {
         int number = 0;
-        Vector vector = new Vector();
+        Vector vector = new Vector(new int[0]);
         int[] expected = {0};
         assertArrayEquals(expected, vector.getDigits(number));
     }
