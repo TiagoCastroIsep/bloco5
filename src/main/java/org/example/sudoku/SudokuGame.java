@@ -19,7 +19,6 @@ public class SudokuGame {
             if (!isComplete) return false;
             rowNr++;
         }
-
         return true;
     }
 

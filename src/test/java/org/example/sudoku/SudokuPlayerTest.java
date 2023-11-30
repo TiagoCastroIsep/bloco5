@@ -37,10 +37,9 @@ class SudokuPlayerTest {
         int row = -1;
         int column = 0;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -1;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -48,10 +47,9 @@ class SudokuPlayerTest {
         int row = sudokuCard.getGameMatrixSize();
         int column = 0;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -1;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -59,10 +57,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = -1;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -1;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -70,10 +67,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = sudokuCard.getGameMatrixSize();
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -1;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -81,10 +77,9 @@ class SudokuPlayerTest {
         int row = 1;
         int column = 1;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -1;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -92,10 +87,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = 0;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = 0;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -103,10 +97,9 @@ class SudokuPlayerTest {
         int row = sudokuCard.getGameMatrixSize() - 1;
         int column = 1;
         int numberPlayed = 2;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = 0;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -114,10 +107,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = 0;
         int numberPlayed = 1;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = 0;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -125,10 +117,9 @@ class SudokuPlayerTest {
         int row = 1;
         int column = sudokuCard.getGameMatrixSize() - 1;
         int numberPlayed = 2;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = 0;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -136,10 +127,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = 0;
         int numberPlayed = 8;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -2;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -147,10 +137,9 @@ class SudokuPlayerTest {
         int row = 0;
         int column = 0;
         int numberPlayed = 4;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
         int expected = -2;
-        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed, isUpdating));
+        assertEquals(expected, sudokuPlayer.play(row, column, numberPlayed));
     }
 
     @Test
@@ -158,9 +147,8 @@ class SudokuPlayerTest {
         int row = 0;
         int column = 0;
         int numberPlayed = 2;
-        boolean isUpdating = false;
         SudokuPlayer sudokuPlayer = new SudokuPlayer(sudokuCard);
-        sudokuPlayer.play(row, column, numberPlayed, isUpdating);
+        sudokuPlayer.play(row, column, numberPlayed);
         int[][] expected = {
                 {2, 0, 0, 8, 0, 0, 0, 0, 9}, // 9
                 {0, 1, 9, 0, 0, 5, 8, 3, 0}, // 8

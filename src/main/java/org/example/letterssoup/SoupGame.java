@@ -18,7 +18,7 @@ public class SoupGame {
          * otherwise: I'll need to perform a full scan on the matrix for lines, columns and diagonals adding those methods **/
         int hitsCount = getHitsCount(hitsMask);
 
-        return hitsCount == hitsMask.length;
+        return hitsCount == word.length();
     }
 
     private char[] convertStringToChars(String word) {

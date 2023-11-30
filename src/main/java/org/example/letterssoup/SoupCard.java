@@ -1,19 +1,21 @@
 package org.example.letterssoup;
 
+import java.util.Arrays;
+
 public class SoupCard {
     private final char[][] soupMatrix;
 
     public SoupCard(char[][] soupMatrix) throws InstantiationException {
         if (soupMatrix == null) throw new InstantiationException();
-        if (soupMatrix.length == 0) throw new IllegalArgumentException();
-        if (!isRegularMatrix()) throw new IllegalArgumentException();
+        if (soupMatrix.length == 0) throw new InstantiationException();
+        if (!isRegularMatrix(soupMatrix)) throw new InstantiationException();
         this.soupMatrix = getDeepCopy(soupMatrix);
     }
 
-    public boolean isRegularMatrix() {
-        int firstRowLength = soupMatrix[0].length;
-        for (int i = 1; i < soupMatrix.length; i++) {
-            if (soupMatrix[i].length != firstRowLength) return false;
+    public boolean isRegularMatrix(char[][] matrix) {
+        int firstRowLength = matrix[0].length;
+        for (int i = 1; i < matrix.length; i++) {
+            if (matrix[i].length != firstRowLength) return false;
         }
         return true;
     }
@@ -21,7 +23,7 @@ public class SoupCard {
     private char[][] getDeepCopy(char[][] matrix) {
         char[][] charCopy = new char[matrix.length][matrix[0].length];
         int index = 0;
-        for (char[] row : soupMatrix) {
+        for (char[] row : matrix) {
             charCopy[index] = row;
             index++;
         }

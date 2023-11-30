@@ -45,11 +45,7 @@ public class PlaySudoku {
         boolean gameOver = false;
 
         while (!gameOver) {
-            boolean updatingPlayedNumber = false;
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Are you going to update a played number? (y/n)");
-            String isUpdate = scanner.nextLine();
-            if (isUpdate.trim().equals("y")) updatingPlayedNumber = true;
 
             System.out.println("Please enter the row number (\"Q\" or \"q\" to quit): ");
             String selection = scanner.nextLine();
@@ -70,7 +66,7 @@ public class PlaySudoku {
             System.out.println("Please enter the number: ");
             int numberSelected = scanner.nextInt();
 
-            int playResult = sudokuPlayerOne.play(rowSelected, columnSelected, numberSelected, updatingPlayedNumber);
+            int playResult = sudokuPlayerOne.play(rowSelected, columnSelected, numberSelected);
             if (playResult == 0) System.out.println("The game matrix was updated! Your choice was correct!");
             if (playResult == -1) System.out.println("Invalid choice! You're trying to change a default number from this card or providing invalid number!");
             if (playResult == -2) System.out.println("You're trying to add a repeated number!");
