@@ -5,7 +5,8 @@ import java.util.Arrays;
 public class SoupGame {
     private final SoupCard soupCard;
 
-    public SoupGame(SoupCard soupCard) {
+    public SoupGame(SoupCard soupCard) throws InstantiationException {
+        if (soupCard == null) throw new InstantiationException();
         this.soupCard = soupCard;
     }
 

@@ -10,7 +10,7 @@ class SudokuCardTest {
     SudokuCard sudokuCard;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws InstantiationException {
         gameMatrix = new int[][]{
                 {0, 0, 0, 8, 0, 0, 0, 0, 9}, // 9
                 {0, 1, 9, 0, 0, 5, 8, 3, 0}, // 8

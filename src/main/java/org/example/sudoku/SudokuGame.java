@@ -6,7 +6,8 @@ import java.util.Set;
 public class SudokuGame {
     private final SudokuCard gameMatrix;
 
-    public SudokuGame(SudokuCard gameMatrix) {
+    public SudokuGame(SudokuCard gameMatrix) throws InstantiationException {
+        if (gameMatrix == null) throw new InstantiationException();
         this.gameMatrix = gameMatrix;
     }
 

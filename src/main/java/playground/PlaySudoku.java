@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlaySudoku {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InstantiationException {
 //        int[][] gameMatrix = {
 //                {0, 4, 6, 2, 8, 7, 3, 5, 1}, // 9
 //                {5, 0, 3, 6, 1, 9, 7, 4, 2}, // 8

@@ -2,14 +2,13 @@ package org.example.sudoku;
 
 import org.example.EmptyArrayException;
 
-import java.util.Arrays;
-
 public class SudokuCard {
     private final int[][] cardMatrix;
     private final int gameMatrixSize;
     private final int[][] startCard;
 
-    public SudokuCard(int[][] cardMatrix) {
+    public SudokuCard(int[][] cardMatrix) throws InstantiationException {
+        if (cardMatrix == null) throw new InstantiationException();
         if (cardMatrix.length == 0) throw new EmptyArrayException();
         this.cardMatrix = getDeepCopy(cardMatrix);
         this.gameMatrixSize = this.cardMatrix.length;

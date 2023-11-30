@@ -10,7 +10,7 @@ class SudokuGameTest {
     SudokuCard sudokuCard;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws InstantiationException {
         gameMatrix = new int[][]{
                 {0, 0, 0, 8, 0, 0, 0, 0, 9}, // 9
                 {0, 1, 9, 0, 0, 5, 8, 3, 0}, // 8
@@ -27,13 +27,13 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldCreateGame() {
+    public void shouldCreateGame() throws InstantiationException {
         SudokuGame sudokuGame = new SudokuGame(sudokuCard);
 //        assertInstanceOf(SudokuCard.class, sudokuGame.getGameMatrix());
     }
 
     @Test
-    public void shouldReturnTrueForGameOver() {
+    public void shouldReturnTrueForGameOver() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 2, 3, 4},
                 {4, 3, 1, 2},
@@ -45,13 +45,13 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldReturnFalseForGameOver() {
+    public void shouldReturnFalseForGameOver() throws InstantiationException {
         SudokuGame sudokuGame = new SudokuGame(sudokuCard);
         assertFalse(sudokuGame.isGameOver());
     }
 
     @Test
-    public void shouldReturnFalseForGameOverWhenColumnsAreNotFilled() {
+    public void shouldReturnFalseForGameOverWhenColumnsAreNotFilled() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 2, 3, 4},
                 {0, 3, 1, 2},
@@ -63,7 +63,7 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldReturnFalseForGameOverWhenRowIsNotFilled() {
+    public void shouldReturnFalseForGameOverWhenRowIsNotFilled() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 2, 3, 4},
                 {0, 0, 0, 0},
@@ -75,7 +75,7 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldReturnFalseForGameOverWhenColumnIsNotFilled() {
+    public void shouldReturnFalseForGameOverWhenColumnIsNotFilled() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 0, 3, 4},
                 {4, 0, 1, 2},
@@ -87,7 +87,7 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldReturnFalseForGameOverWhenWrongNumbersAreFilledRow() {
+    public void shouldReturnFalseForGameOverWhenWrongNumbersAreFilledRow() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 2, 4, 4},
                 {4, 3, 1, 2},
@@ -99,7 +99,7 @@ class SudokuGameTest {
     }
 
     @Test
-    public void shouldReturnFalseForGameOverWhenWrongNumbersAreFilledColumn() {
+    public void shouldReturnFalseForGameOverWhenWrongNumbersAreFilledColumn() throws InstantiationException {
         int[][] finalGameMatrix = {
                 {1, 2, 3, 4},
                 {4, 3, 1, 2},
