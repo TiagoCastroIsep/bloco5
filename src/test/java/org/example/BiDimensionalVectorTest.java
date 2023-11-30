@@ -345,13 +345,13 @@ class BiDimensionalVectorTest {
                 {1, 2}
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.checkIfMatrixIsSquare());
+        assertTrue(biDimensionalVector.isSquare());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+        assertFalse(biDimensionalVector.isSquare());
     }
 
     @Test
@@ -361,7 +361,7 @@ class BiDimensionalVectorTest {
                 {1, 2, 4}
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+        assertFalse(biDimensionalVector.isSquare());
     }
 
     @Test
@@ -371,13 +371,13 @@ class BiDimensionalVectorTest {
                 {1, 2}
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+        assertFalse(biDimensionalVector.isSquare());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix_checkRegular() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.checkIfMatrixIsSquare());
+        assertFalse(biDimensionalVector.isSquare());
     }
 
     @Test
@@ -388,7 +388,7 @@ class BiDimensionalVectorTest {
                 {1, 2, 3, 4}
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.checkIfMatrixIsRegular());
+        assertFalse(biDimensionalVector.isRegular());
     }
 
     @Test
@@ -399,13 +399,13 @@ class BiDimensionalVectorTest {
                 {1, 2, 3}
         };
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.checkIfMatrixIsRegular());
+        assertTrue(biDimensionalVector.isRegular());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix_regularMatrix() {
         BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.checkIfMatrixIsRegular());
+        assertFalse(biDimensionalVector.isRegular());
     }
 
     @Test

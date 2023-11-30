@@ -3,15 +3,11 @@ package org.example.sudoku;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Game {
-    private final Card gameMatrix;
+public class SudokuGame {
+    private final SudokuCard gameMatrix;
 
-    public Game(Card gameMatrix) {
+    public SudokuGame(SudokuCard gameMatrix) {
         this.gameMatrix = gameMatrix;
-    }
-
-    public Card getGameMatrix() {
-        return gameMatrix;
     }
 
     public boolean isGameOver() {
@@ -32,7 +28,6 @@ public class Game {
                 rowNumbers.add(gameMatrix.getCardMatrix()[rowNr][i]);
             }
         }
-
         return rowNumbers.size() == gameMatrix.getGameMatrixSize();
     }
 }

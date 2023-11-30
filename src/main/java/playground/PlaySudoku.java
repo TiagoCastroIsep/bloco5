@@ -1,8 +1,8 @@
 package playground;
 
-import org.example.sudoku.Card;
-import org.example.sudoku.Game;
-import org.example.sudoku.Player;
+import org.example.sudoku.SudokuCard;
+import org.example.sudoku.SudokuGame;
+import org.example.sudoku.SudokuPlayer;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -33,9 +33,9 @@ public class PlaySudoku {
                 {9, 0, 4, 5, 0, 0, 0, 0, 1}
         };
 
-        Card sudokuCard = new Card(gameMatrix);
-        Game sudokuGame = new Game(sudokuCard);
-        Player playerOne = new Player(sudokuCard);
+        SudokuCard sudokuCard = new SudokuCard(gameMatrix);
+        SudokuGame sudokuGame = new SudokuGame(sudokuCard);
+        SudokuPlayer sudokuPlayerOne = new SudokuPlayer(sudokuCard);
 
         System.out.println("|0, 1, 2, 3, 4, 5, 6, 7, 8|");
         System.out.println("---------------------------");
@@ -70,7 +70,7 @@ public class PlaySudoku {
             System.out.println("Please enter the number: ");
             int numberSelected = scanner.nextInt();
 
-            int playResult = playerOne.play(rowSelected, columnSelected, numberSelected, updatingPlayedNumber);
+            int playResult = sudokuPlayerOne.play(rowSelected, columnSelected, numberSelected, updatingPlayedNumber);
             if (playResult == 0) System.out.println("The game matrix was updated! Your choice was correct!");
             if (playResult == -1) System.out.println("Invalid choice! You're trying to change a default number from this card or providing invalid number!");
             if (playResult == -2) System.out.println("You're trying to add a repeated number!");

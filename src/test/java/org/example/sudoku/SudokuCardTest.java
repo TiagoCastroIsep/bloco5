@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CardTest {
+class SudokuCardTest {
     int[][] gameMatrix;
-    Card sudokuCard;
+    SudokuCard sudokuCard;
 
     @BeforeEach
     public void setup() {
@@ -23,11 +23,11 @@ class CardTest {
                 {9, 0, 4, 5, 0, 0, 0, 0, 1}
         };
 
-        sudokuCard = new Card(gameMatrix);
+        sudokuCard = new SudokuCard(gameMatrix);
     }
 
     @Test
     public void shouldReturnInitialCardMaskMatrix() {
-        assertArrayEquals(gameMatrix, sudokuCard.getInitialCardMaskMatrix());
+        assertArrayEquals(gameMatrix, sudokuCard.getStartCard());
     }
 }
