@@ -22,4 +22,80 @@ class SoupGameTest {
     public void shouldCreateObject() throws InstantiationException {
         SoupGame soupGame = new SoupGame(soupCard);
     }
+
+    @Test
+    public void shouldThrowExceptionWhenRowIndexBiggerThanMatrixLengthPrincipalDiagonal() throws InstantiationException {
+        char[][] matrix = new char[][] {
+                {'a', 'b', 'a'},
+                {'d', 'e', 'f'},
+                {'g', 'h', 'i'},
+        };
+        int[][] maskMatrix = new int[][] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1},
+        };
+        int row = 4;
+        int column = 0;
+        SoupCard card = new SoupCard(matrix);
+        SoupGame game = new SoupGame(card);
+        assertThrows(IndexOutOfBoundsException.class, () -> game.getMaskDiagonal(maskMatrix, row, column));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenRowIndexEqualsMatrixLengthPrincipalDiagonal() throws InstantiationException {
+        char[][] matrix = new char[][] {
+                {'a', 'b', 'a'},
+                {'d', 'e', 'f'},
+                {'g', 'h', 'i'},
+        };
+        int[][] maskMatrix = new int[][] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1},
+        };
+        int row = 3;
+        int column = 0;
+        SoupCard card = new SoupCard(matrix);
+        SoupGame game = new SoupGame(card);
+        assertThrows(IndexOutOfBoundsException.class, () -> game.getMaskDiagonal(maskMatrix, row, column));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenRowIndexBiggerThanMatrixLengthSecondDiagonal() throws InstantiationException {
+        char[][] matrix = new char[][] {
+                {'a', 'b', 'a'},
+                {'d', 'e', 'f'},
+                {'g', 'h', 'i'},
+        };
+        int[][] maskMatrix = new int[][] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1},
+        };
+        int row = 4;
+        int column = 0;
+        SoupCard card = new SoupCard(matrix);
+        SoupGame game = new SoupGame(card);
+        assertThrows(IndexOutOfBoundsException.class, () -> game.getMaskSecondDiagonal(maskMatrix, row, column));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenRowIndexEqualsMatrixLengthSecondDiagonal() throws InstantiationException {
+        char[][] matrix = new char[][] {
+                {'a', 'b', 'a'},
+                {'d', 'e', 'f'},
+                {'g', 'h', 'i'},
+        };
+        int[][] maskMatrix = new int[][] {
+                {1, 0, 0},
+                {0, 1, 0},
+                {0, 0, 1},
+        };
+        int row = 3;
+        int column = 0;
+        SoupCard card = new SoupCard(matrix);
+        SoupGame game = new SoupGame(card);
+        assertThrows(IndexOutOfBoundsException.class, () -> game.getMaskSecondDiagonal(maskMatrix, row, column));
+    }
 }

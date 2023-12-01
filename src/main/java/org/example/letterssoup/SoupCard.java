@@ -1,7 +1,5 @@
 package org.example.letterssoup;
 
-import java.util.Arrays;
-
 public class SoupCard {
     private final char[][] soupMatrix;
 

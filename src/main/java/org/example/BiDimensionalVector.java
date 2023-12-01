@@ -11,7 +11,8 @@ public class BiDimensionalVector {
     }
 
     public BiDimensionalVector(int[][] biDimensionalVector) {
-//        If I add this line, I must remove all the assertThrows calls since it's at the constructor that the Exception is thrown
+        if (biDimensionalVector == null) throw new EmptyArrayException();
+        if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         this.biDimensionalVector = getDeepCopy(biDimensionalVector);
     }
 
