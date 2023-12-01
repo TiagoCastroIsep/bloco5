@@ -1,8 +1,8 @@
 package org.example;
 
+import org.example.utils.EmptyArrayException;
+import org.example.utils.SortingType;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.MalformedParametersException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

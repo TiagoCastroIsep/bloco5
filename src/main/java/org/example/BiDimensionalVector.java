@@ -1,7 +1,8 @@
 package org.example;
 
+import org.example.utils.EmptyArrayException;
+
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BiDimensionalVector {
     private final int[][] biDimensionalVector;

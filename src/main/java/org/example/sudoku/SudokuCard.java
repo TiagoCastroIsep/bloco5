@@ -1,6 +1,6 @@
 package org.example.sudoku;
 
-import org.example.EmptyArrayException;
+import org.example.utils.EmptyArrayException;
 
 public class SudokuCard {
     private final int[][] cardMatrix;
