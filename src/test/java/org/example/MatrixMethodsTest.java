@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BiDimensionalVectorTest {
+class MatrixMethodsTest {
     @Test
     public void shouldCreateBiDimensionalEmptyArray() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        MatrixMethods matrixMethods = new MatrixMethods();
     }
 
     @Test
     public void shouldCreateBiDimensionalArray() {
         int[][] array = {{1, 2}, {1, 2}};
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertArrayEquals(array, biDimensionalVector.getBiDimensionalVector());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertArrayEquals(array, matrixMethods.getBiDimensionalVector());
     }
 
     @Test
@@ -23,9 +23,9 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 0;
         int number = 3;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {{1, 2, 3}, {1, 2}};
-        assertArrayEquals(expected, biDimensionalVector.addToRow(rowNumber, number));
+        assertArrayEquals(expected, matrixMethods.addToRow(rowNumber, number));
     }
 
     @Test
@@ -33,8 +33,8 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = -1;
         int number = 3;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.addToRow(rowNumber, number));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.addToRow(rowNumber, number));
     }
 
     @Test
@@ -42,8 +42,8 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 2;
         int number = 3;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.addToRow(rowNumber, number));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.addToRow(rowNumber, number));
     }
 
     @Test
@@ -51,9 +51,9 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 0;
         int index = 0;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {{2}, {1, 2}};
-        assertArrayEquals(expected, biDimensionalVector.removeAtRow(rowNumber, index));
+        assertArrayEquals(expected, matrixMethods.removeAtRow(rowNumber, index));
     }
 
     @Test
@@ -61,8 +61,8 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = -1;
         int index = 0;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.removeAtRow(rowNumber, index));
     }
 
     @Test
@@ -70,8 +70,8 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 2;
         int index = 0;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.removeAtRow(rowNumber, index));
     }
 
     @Test
@@ -79,8 +79,8 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 0;
         int index = 2;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.removeAtRow(rowNumber, index));
     }
 
     @Test
@@ -88,21 +88,21 @@ class BiDimensionalVectorTest {
         int[][] array = {{1, 2}, {1, 2}};
         int rowNumber = 0;
         int index = -1;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(ArrayIndexOutOfBoundsException.class, () -> biDimensionalVector.removeAtRow(rowNumber, index));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> matrixMethods.removeAtRow(rowNumber, index));
     }
 
     @Test
     public void shouldReturnFalseForNotEmptyMatrix() {
         int[][] array = {{1, 2}, {1, 2}};
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertFalse(biDimensionalVector.isEmpty(array));
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertFalse(matrixMethods.isEmpty(array));
     }
 
     @Test
     public void shouldReturnTrueForEmptyMatrix() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertTrue(biDimensionalVector.isEmpty(new int[0][]));
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertTrue(matrixMethods.isEmpty(new int[0][]));
     }
 
     @Test
@@ -111,9 +111,9 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 4;
-        assertEquals(expected, biDimensionalVector.getMax());
+        assertEquals(expected, matrixMethods.getMax());
     }
 
     @Test
@@ -122,9 +122,9 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {2, 1}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 2;
-        assertEquals(expected, biDimensionalVector.getMax());
+        assertEquals(expected, matrixMethods.getMax());
     }
 
     @Test
@@ -133,9 +133,9 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {0, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 4;
-        assertEquals(expected, biDimensionalVector.getMax());
+        assertEquals(expected, matrixMethods.getMax());
     }
 
     @Test
@@ -144,9 +144,9 @@ class BiDimensionalVectorTest {
                 {4, 1},
                 {2, 3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 4;
-        assertEquals(expected, biDimensionalVector.getMax());
+        assertEquals(expected, matrixMethods.getMax());
     }
 
     @Test
@@ -155,15 +155,15 @@ class BiDimensionalVectorTest {
                 {0, 0},
                 {0, 0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 0;
-        assertEquals(expected, biDimensionalVector.getMax());
+        assertEquals(expected, matrixMethods.getMax());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getMax);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getMax);
     }
 
     @Test
@@ -172,9 +172,9 @@ class BiDimensionalVectorTest {
                 {4, 2},
                 {3, 1}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 1;
-        assertEquals(expected, biDimensionalVector.getMin());
+        assertEquals(expected, matrixMethods.getMin());
     }
 
     @Test
@@ -183,9 +183,9 @@ class BiDimensionalVectorTest {
                 {1, 4},
                 {2, 3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 1;
-        assertEquals(expected, biDimensionalVector.getMin());
+        assertEquals(expected, matrixMethods.getMin());
     }
 
     @Test
@@ -194,21 +194,21 @@ class BiDimensionalVectorTest {
                 {0, 0},
                 {0, 0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 0;
-        assertEquals(expected, biDimensionalVector.getMin());
+        assertEquals(expected, matrixMethods.getMin());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray_getMin() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getMin);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getMin);
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray_getAverage() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getAverage);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getAverage);
     }
 
     @Test
@@ -217,9 +217,9 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         double expected = 2.5;
-        assertEquals(expected, biDimensionalVector.getAverage());
+        assertEquals(expected, matrixMethods.getAverage());
     }
 
     @Test
@@ -228,15 +228,15 @@ class BiDimensionalVectorTest {
                 {0, 0},
                 {0, 0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         double expected = 0.0;
-        assertEquals(expected, biDimensionalVector.getAverage());
+        assertEquals(expected, matrixMethods.getAverage());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray_getEachRowSum() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getEachRowSum);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getEachRowSum);
     }
 
     @Test
@@ -245,9 +245,9 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[] expected = {3, 7};
-        assertArrayEquals(expected, biDimensionalVector.getEachRowSum());
+        assertArrayEquals(expected, matrixMethods.getEachRowSum());
     }
 
     @Test
@@ -256,15 +256,15 @@ class BiDimensionalVectorTest {
                 {0, 0},
                 {0, 0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[] expected = {0, 0};
-        assertArrayEquals(expected, biDimensionalVector.getEachRowSum());
+        assertArrayEquals(expected, matrixMethods.getEachRowSum());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray_getEachColumnSum() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getEachColumnSum);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getEachColumnSum);
     }
 
     @Test
@@ -273,8 +273,8 @@ class BiDimensionalVectorTest {
                 {0, 0},
                 {0, 0, 0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(IllegalArgumentException.class, biDimensionalVector::getEachColumnSum);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(IllegalArgumentException.class, matrixMethods::getEachColumnSum);
     }
 
     @Test
@@ -284,8 +284,8 @@ class BiDimensionalVectorTest {
                 {2, 1, 1}
         };
         int[] expected = {3, 3, 2};
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertArrayEquals(expected, biDimensionalVector.getEachColumnSum());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertArrayEquals(expected, matrixMethods.getEachColumnSum());
     }
 
     @Test
@@ -296,8 +296,8 @@ class BiDimensionalVectorTest {
                 {1, 1}
         };
         int[] expected = {3, 4};
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertArrayEquals(expected, biDimensionalVector.getEachColumnSum());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertArrayEquals(expected, matrixMethods.getEachColumnSum());
     }
 
     @Test
@@ -307,14 +307,14 @@ class BiDimensionalVectorTest {
                 {0, 0}
         };
         int[] expected = {0, 0};
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertArrayEquals(expected, biDimensionalVector.getEachColumnSum());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertArrayEquals(expected, matrixMethods.getEachColumnSum());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyMatrix_getIndexFromMaxSum() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::getRowIndexFromMaxSum);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::getRowIndexFromMaxSum);
     }
 
     @Test
@@ -324,8 +324,8 @@ class BiDimensionalVectorTest {
                 {2, 4}
         };
         int expected = 1;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertEquals(expected, biDimensionalVector.getRowIndexFromMaxSum());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertEquals(expected, matrixMethods.getRowIndexFromMaxSum());
     }
 
     @Test
@@ -335,8 +335,8 @@ class BiDimensionalVectorTest {
                 {0, 0}
         };
         int expected = 0;
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertEquals(expected, biDimensionalVector.getRowIndexFromMaxSum());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertEquals(expected, matrixMethods.getRowIndexFromMaxSum());
     }
 
     @Test
@@ -345,14 +345,14 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {1, 2}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.isSquare());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertTrue(matrixMethods.isSquare());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.isSquare());
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertFalse(matrixMethods.isSquare());
     }
 
     @Test
@@ -361,8 +361,8 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {1, 2, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isSquare());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isSquare());
     }
 
     @Test
@@ -371,14 +371,14 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {1, 2}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isSquare());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isSquare());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix_checkRegular() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.isSquare());
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertFalse(matrixMethods.isSquare());
     }
 
     @Test
@@ -388,8 +388,8 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {1, 2, 3, 4}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isRegular());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isRegular());
     }
 
     @Test
@@ -399,14 +399,14 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {1, 2, 3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.isRegular());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertTrue(matrixMethods.isRegular());
     }
 
     @Test
     public void shouldReturnFalseForEmptyMatrix_regularMatrix() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.isRegular());
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertFalse(matrixMethods.isRegular());
     }
 
     @Test
@@ -415,8 +415,8 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isSymmetrical());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isSymmetrical());
     }
 
     @Test
@@ -425,8 +425,8 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isSymmetrical());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isSymmetrical());
     }
 
     @Test
@@ -437,8 +437,8 @@ class BiDimensionalVectorTest {
                 {2, 2, 2, 2},
                 {1, 1, 1, 1},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertFalse(biDimensionalVector.isSymmetrical());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertFalse(matrixMethods.isSymmetrical());
     }
 
     @Test
@@ -447,8 +447,8 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {2, 3}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.isSymmetrical());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertTrue(matrixMethods.isSymmetrical());
     }
 
     @Test
@@ -459,15 +459,15 @@ class BiDimensionalVectorTest {
                 {2, 2, 2, 2},
                 {4, 3, 2, 1},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(matrix);
-        assertTrue(biDimensionalVector.isSymmetrical());
+        MatrixMethods matrixMethods = new MatrixMethods(matrix);
+        assertTrue(matrixMethods.isSymmetrical());
     }
 
     @Test
     public void shouldReturnMinusOneForEmptyArray() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        MatrixMethods matrixMethods = new MatrixMethods();
         int expected = -1;
-        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+        assertEquals(expected, matrixMethods.countNotZeroPrincipalDiagonal());
     }
 
     @Test
@@ -477,9 +477,9 @@ class BiDimensionalVectorTest {
                 {3, 4},
                 {5, 6}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = -1;
-        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+        assertEquals(expected, matrixMethods.countNotZeroPrincipalDiagonal());
     }
 
     @Test
@@ -488,9 +488,9 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 0},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 1;
-        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+        assertEquals(expected, matrixMethods.countNotZeroPrincipalDiagonal());
     }
 
     @Test
@@ -499,15 +499,15 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 1},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int expected = 2;
-        assertEquals(expected, biDimensionalVector.countNotZeroPrincipalDiagonal());
+        assertEquals(expected, matrixMethods.countNotZeroPrincipalDiagonal());
     }
 
     @Test
     public void shouldReturnFalseForEmptyArray() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertFalse(matrixMethods.isPrincipalDiagonalEqualsSecondaryDiagonal());
     }
 
     @Test
@@ -517,8 +517,8 @@ class BiDimensionalVectorTest {
                 {3, 4},
                 {5, 6}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertFalse(matrixMethods.isPrincipalDiagonalEqualsSecondaryDiagonal());
     }
 
     @Test
@@ -527,8 +527,8 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {1, 2},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertFalse(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertFalse(matrixMethods.isPrincipalDiagonalEqualsSecondaryDiagonal());
     }
 
     @Test
@@ -537,15 +537,15 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {2, 2},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertTrue(biDimensionalVector.isPrincipalDiagonalEqualsSecondaryDiagonal());
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertTrue(matrixMethods.isPrincipalDiagonalEqualsSecondaryDiagonal());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArray_getNumbersWithGreaterDigitsThanAverage() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
+        MatrixMethods matrixMethods = new MatrixMethods();
         boolean gettingJustEven = false;
-        assertThrows(EmptyArrayException.class, () -> biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+        assertThrows(EmptyArrayException.class, () -> matrixMethods.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
     }
 
     @Test
@@ -554,10 +554,10 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {1, 10}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         boolean gettingJustEven = false;
         int[] expected = {10};
-        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+        assertArrayEquals(expected, matrixMethods.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
     }
 
     @Test
@@ -566,10 +566,10 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {1, 1}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         boolean gettingJustEven = false;
         int[] expected = {};
-        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+        assertArrayEquals(expected, matrixMethods.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
     }
 
     @Test
@@ -578,10 +578,10 @@ class BiDimensionalVectorTest {
                 {2, 2},
                 {2, 120}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         boolean gettingJustEven = true;
         int[] expected = {120};
-        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+        assertArrayEquals(expected, matrixMethods.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
     }
 
     @Test
@@ -590,16 +590,16 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {1, 1}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         boolean gettingJustEven = true;
         int[] expected = {};
-        assertArrayEquals(expected, biDimensionalVector.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
+        assertArrayEquals(expected, matrixMethods.getNumbersWithGreaterDigitsThanAverage(gettingJustEven));
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArrayOnInvertedValuesForEachMatrixRow() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::invertValuesEachRow);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::invertValuesEachRow);
     }
 
     @Test
@@ -608,8 +608,8 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {2, 2, 2},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(IllegalArgumentException.class, biDimensionalVector::invertValuesEachRow);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(IllegalArgumentException.class, matrixMethods::invertValuesEachRow);
     }
 
     @Test
@@ -618,12 +618,12 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {4, 5, 6}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {3, 2, 1},
                 {6, 5, 4}
         };
-        assertArrayEquals(expected, biDimensionalVector.invertValuesEachRow());
+        assertArrayEquals(expected, matrixMethods.invertValuesEachRow());
     }
 
     @Test
@@ -632,12 +632,12 @@ class BiDimensionalVectorTest {
                 {0},
                 {0}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {0},
                 {0}
         };
-        assertArrayEquals(expected, biDimensionalVector.invertValuesEachRow());
+        assertArrayEquals(expected, matrixMethods.invertValuesEachRow());
     }
 
     @Test
@@ -646,13 +646,13 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {4, 5, 6}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {1, 4},
                 {2, 5},
                 {3, 6}
         };
-        assertArrayEquals(expected, biDimensionalVector.invertMatrixByColumn());
+        assertArrayEquals(expected, matrixMethods.invertMatrixByColumn());
     }
 
     @Test
@@ -661,18 +661,18 @@ class BiDimensionalVectorTest {
                 {1, 2},
                 {3, 4},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {1, 3},
                 {2, 4},
         };
-        assertArrayEquals(expected, biDimensionalVector.invertMatrixByColumn());
+        assertArrayEquals(expected, matrixMethods.invertMatrixByColumn());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArrayOnInvertedValuesForEachMatrixColumn() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::invertColumn);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::invertColumn);
     }
 
     @Test
@@ -681,8 +681,8 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {2, 2, 2},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(IllegalArgumentException.class, biDimensionalVector::invertColumn);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(IllegalArgumentException.class, matrixMethods::invertColumn);
     }
 
     @Test
@@ -691,18 +691,18 @@ class BiDimensionalVectorTest {
                 {1, 2, 3},
                 {4, 5, 6}
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {4, 5, 6},
                 {1, 2, 3}
         };
-        assertArrayEquals(expected, biDimensionalVector.invertColumn());
+        assertArrayEquals(expected, matrixMethods.invertColumn());
     }
 
     @Test
     public void shouldThrowExceptionForEmptyArrayOnRotated90() {
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector();
-        assertThrows(EmptyArrayException.class, biDimensionalVector::rotate90);
+        MatrixMethods matrixMethods = new MatrixMethods();
+        assertThrows(EmptyArrayException.class, matrixMethods::rotate90);
     }
 
     @Test
@@ -711,8 +711,8 @@ class BiDimensionalVectorTest {
                 {1, 1},
                 {2, 2, 2},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
-        assertThrows(IllegalArgumentException.class, biDimensionalVector::rotate90);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
+        assertThrows(IllegalArgumentException.class, matrixMethods::rotate90);
     }
 
     @Test
@@ -723,14 +723,14 @@ class BiDimensionalVectorTest {
                 {8, 9, 0, 1},
                 {2, 3, 4, 5},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {4, 7, 1, 5},
                 {3, 6, 0, 4},
                 {2, 5, 9, 3},
                 {1, 4, 8, 2},
         };
-        assertArrayEquals(expected, biDimensionalVector.rotate90());
+        assertArrayEquals(expected, matrixMethods.rotate90());
     }
 
     @Test
@@ -741,14 +741,14 @@ class BiDimensionalVectorTest {
                 {8, 9, 0, 1},
                 {2, 3, 4, 5},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {5, 4, 3, 2},
                 {1, 0, 9, 8},
                 {7, 6, 5, 4},
                 {4, 3, 2, 1},
         };
-        assertArrayEquals(expected, biDimensionalVector.rotate180(array));
+        assertArrayEquals(expected, matrixMethods.rotate180(array));
     }
 
     @Test
@@ -759,13 +759,13 @@ class BiDimensionalVectorTest {
                 {8, 9, 0, 1},
                 {2, 3, 4, 5},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(array);
+        MatrixMethods matrixMethods = new MatrixMethods(array);
         int[][] expected = {
                 {2, 8, 4, 1},
                 {3, 9, 5, 2},
                 {4, 0, 6, 3},
                 {5, 1, 7, 4},
         };
-        assertArrayEquals(expected, biDimensionalVector.rotateMinus90());
+        assertArrayEquals(expected, matrixMethods.rotateMinus90());
     }
 }

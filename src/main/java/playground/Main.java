@@ -1,14 +1,14 @@
 package playground;
 
-import org.example.BiDimensionalVector;
-import org.example.Vector;
+import org.example.MatrixMethods;
+import org.example.ArrayMethods;
 
 import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
         int[] array = {1, 2, 3};
-        int[] added = new Vector(array).add(4);
+        int[] added = new ArrayMethods(array).add(4);
         System.out.println(Arrays.toString(array));
         System.out.println(Arrays.toString(added));
 
@@ -16,12 +16,12 @@ public class Main {
                 {1, 2, 3},
                 {1, 2, 4},
         };
-        BiDimensionalVector biDimensionalVector = new BiDimensionalVector(biVector);
+        MatrixMethods matrixMethods = new MatrixMethods(biVector);
 
-        biDimensionalVector.addToRow(0, 4);
+        matrixMethods.addToRow(0, 4);
         System.out.println(Arrays.deepToString(biVector));
-        System.out.println(Arrays.deepToString(biDimensionalVector.getBiDimensionalVector()));
-        System.out.println(Arrays.deepToString(biDimensionalVector.addToRow(0, 4)));
+        System.out.println(Arrays.deepToString(matrixMethods.getBiDimensionalVector()));
+        System.out.println(Arrays.deepToString(matrixMethods.addToRow(0, 4)));
     }
 
     // sorting algorithms

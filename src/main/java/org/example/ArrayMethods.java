@@ -6,14 +6,14 @@ import org.example.utils.SortingType;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Vector {
+public class ArrayMethods {
     private final int[] vector;
 
-    public Vector() {
+    public ArrayMethods() {
         this.vector = new int[0];
     }
 
-    public Vector(int[] vector) {
+    public ArrayMethods(int[] vector) {
         this.vector = Arrays.copyOf(vector, vector.length);
     }
 

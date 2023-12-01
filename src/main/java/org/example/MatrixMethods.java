@@ -4,14 +4,14 @@ import org.example.utils.EmptyArrayException;
 
 import java.util.*;
 
-public class BiDimensionalVector {
+public class MatrixMethods {
     private final int[][] biDimensionalVector;
 
-    public BiDimensionalVector() {
+    public MatrixMethods() {
         biDimensionalVector = new int[0][0];
     }
 
-    public BiDimensionalVector(int[][] biDimensionalVector) {
+    public MatrixMethods(int[][] biDimensionalVector) {
         if (biDimensionalVector == null) throw new EmptyArrayException();
         if (biDimensionalVector.length == 0) throw new EmptyArrayException();
         this.biDimensionalVector = getDeepCopy(biDimensionalVector);
@@ -35,21 +35,21 @@ public class BiDimensionalVector {
 
     public int[][] addToRow(int rowNumber, int number) throws ArrayIndexOutOfBoundsException {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
-        Vector vector = new Vector(biDimensionalVector[rowNumber]);
+        ArrayMethods arrayMethods = new ArrayMethods(biDimensionalVector[rowNumber]);
         int[][] biDimenVectorCopy = new int[biDimensionalVector.length][biDimensionalVector[0].length];
         int index = 0;
         for (int[] row : biDimensionalVector) {
             biDimenVectorCopy[index] = row;
             index++;
         }
-        biDimenVectorCopy[rowNumber] = vector.add(number);
+        biDimenVectorCopy[rowNumber] = arrayMethods.add(number);
         return biDimenVectorCopy;
     }
 
     public int[][] removeAtRow(int rowNumber, int index) {
-        Vector vector = new Vector((biDimensionalVector[rowNumber]));
+        ArrayMethods arrayMethods = new ArrayMethods((biDimensionalVector[rowNumber]));
         int[][] biDimenCopy = getDeepCopy(biDimensionalVector);
-        biDimenCopy[rowNumber] = vector.removeAt(index);
+        biDimenCopy[rowNumber] = arrayMethods.removeAt(index);
         return biDimenCopy;
     }
 
@@ -61,8 +61,8 @@ public class BiDimensionalVector {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         int max = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
-            max = Math.max(vector.getMax(), max);
+            ArrayMethods arrayMethods = new ArrayMethods(row);
+            max = Math.max(arrayMethods.getMax(), max);
         }
         return max;
     }
@@ -71,8 +71,8 @@ public class BiDimensionalVector {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         int min = biDimensionalVector[0][0];
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
-            min = Math.min(vector.getMin(), min);
+            ArrayMethods arrayMethods = new ArrayMethods(row);
+            min = Math.min(arrayMethods.getMin(), min);
         }
         return min;
     }
@@ -81,8 +81,8 @@ public class BiDimensionalVector {
         if (isEmpty(biDimensionalVector)) throw new EmptyArrayException();
         List<Double> rowAverage = new ArrayList<>();
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
-            rowAverage.add(vector.getAverage(row));
+            ArrayMethods arrayMethods = new ArrayMethods(row);
+            rowAverage.add(arrayMethods.getAverage(row));
         }
         return rowAverage.stream().reduce(0.0, (el, acc) -> el + acc) / rowAverage.size();
     }
@@ -113,9 +113,9 @@ public class BiDimensionalVector {
 
     public int getRowIndexFromMaxSum() {
         int[] rowSum = getEachRowSum();
-        Vector vector = new Vector(rowSum);
+        ArrayMethods arrayMethods = new ArrayMethods(rowSum);
 
-        return vector.indexOf(vector.getMax());
+        return arrayMethods.indexOf(arrayMethods.getMax());
     }
 
     public boolean isSquare() {
@@ -194,9 +194,9 @@ public class BiDimensionalVector {
 
         int count = 0;
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
-            if (!gettingJustEven) count += vector.getDigitsCountFromVector();
-            else count += vector.getEvenDigitsInVector(row).length;
+            ArrayMethods arrayMethods = new ArrayMethods(row);
+            if (!gettingJustEven) count += arrayMethods.getDigitsCountFromVector();
+            else count += arrayMethods.getEvenDigitsInVector(row).length;
         }
         return count;
     }
@@ -218,12 +218,12 @@ public class BiDimensionalVector {
         double average = getDigitsAverage(gettingJustEven);
 
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
+            ArrayMethods arrayMethods = new ArrayMethods(row);
             for (int number : row) {
                 if (!gettingJustEven) {
-                    if (vector.getDigits(number).length > average) greaterDigits.add(number);
+                    if (arrayMethods.getDigits(number).length > average) greaterDigits.add(number);
                 } else {
-                    int[] digits = vector.getDigits(number);
+                    int[] digits = arrayMethods.getDigits(number);
                     int count = 0;
                     for (int digit : digits) {
                         if (digit % 2 == 0) count++;
@@ -243,8 +243,8 @@ public class BiDimensionalVector {
         int[][] reversedMatrix = new int[biDimensionalVector.length][biDimensionalVector[0].length];
         int index = 0;
         for (int[] row : biDimensionalVector) {
-            Vector vector = new Vector(row);
-            reversedMatrix[index] = vector.reversedOrder();
+            ArrayMethods arrayMethods = new ArrayMethods(row);
+            reversedMatrix[index] = arrayMethods.reversedOrder();
             index++;
         }
 
